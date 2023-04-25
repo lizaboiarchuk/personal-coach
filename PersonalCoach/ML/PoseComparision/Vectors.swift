@@ -19,5 +19,5 @@ let VECTORS = [
   (Joint.leftHip, Joint.leftKnee),
   (Joint.leftKnee, Joint.leftAnkle),
   (Joint.rightHip, Joint.rightKnee),
-  (Joint.rightKnee, to: Joint.rightAnkle),
+  (Joint.rightKnee, Joint.rightAnkle),
 ]

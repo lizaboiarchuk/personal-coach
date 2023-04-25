@@ -7,5 +7,10 @@ target 'PersonalCoach' do
 
   # Pods for PersonalCoach
   pod 'TensorFlowLiteSwift', '~> 0.0.1-nightly', :subspecs => ['CoreML', 'Metal']
+  pod 'Firebase/Core' 
+  pod 'Firebase/Storage'
+  pod 'Firebase/Firestore'
+  pod 'FirebaseFirestore'
+  pod 'FirebaseFirestoreSwift'
 
 end

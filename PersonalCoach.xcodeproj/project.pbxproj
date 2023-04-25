@@ -35,6 +35,12 @@
 		2594414529F8059B00A8BF8E /* Vectors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2594414429F8059B00A8BF8E /* Vectors.swift */; };
 		2594414729F8066100A8BF8E /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2594414629F8066100A8BF8E /* Array.swift */; };
 		2594414929F8088A00A8BF8E /* OverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2594414829F8088A00A8BF8E /* OverlayView.swift */; };
+		2594414E29F8221600A8BF8E /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2594414D29F8221600A8BF8E /* FirestoreManager.swift */; };
+		2594415429F82E3700A8BF8E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2594415329F82E3700A8BF8E /* GoogleService-Info.plist */; };
+		2594415629F831AE00A8BF8E /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2594415529F831AE00A8BF8E /* Workout.swift */; };
+		2594415B29F8491000A8BF8E /* WorkoutPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2594415A29F8491000A8BF8E /* WorkoutPreview.swift */; };
+		2594415F29F8531000A8BF8E /* CoverImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2594415E29F8531000A8BF8E /* CoverImageView.swift */; };
+		2594416629F860A600A8BF8E /* LibraryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2594416529F860A600A8BF8E /* LibraryViewModel.swift */; };
 		25BB957429D36F3400CA1AEB /* LibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BB957329D36F3400CA1AEB /* LibraryView.swift */; };
 		25BB957629D3703700CA1AEB /* LibraryCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BB957529D3703700CA1AEB /* LibraryCellView.swift */; };
 		25BB957829D37CB200CA1AEB /* sample-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 25BB957729D37CB200CA1AEB /* sample-icon.png */; };
@@ -55,7 +61,6 @@
 		25D9AD4529D35DF700821C3F /* CircleGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D9AD4429D35DF700821C3F /* CircleGroupView.swift */; };
 		25D9AD4829D361B000821C3F /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D9AD4729D361B000821C3F /* OnboardingView.swift */; };
 		25D9AD4A29D361E300821C3F /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D9AD4929D361E300821C3F /* HomeView.swift */; };
-		25E9CB8D29D43F3600CDF6EF /* WorkoutInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E9CB8C29D43F3600CDF6EF /* WorkoutInfo.swift */; };
 		25E9CB8F29D43FEB00CDF6EF /* WorkoutDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E9CB8E29D43FEB00CDF6EF /* WorkoutDetailsView.swift */; };
 		9E2B4713425471587C83FF2F /* Pods_PersonalCoach.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73ADF50E06CF536A24F64E07 /* Pods_PersonalCoach.framework */; };
 /* End PBXBuildFile section */
@@ -89,6 +94,12 @@
 		2594414429F8059B00A8BF8E /* Vectors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vectors.swift; sourceTree = "<group>"; };
 		2594414629F8066100A8BF8E /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		2594414829F8088A00A8BF8E /* OverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayView.swift; sourceTree = "<group>"; };
+		2594414D29F8221600A8BF8E /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
+		2594415329F82E3700A8BF8E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		2594415529F831AE00A8BF8E /* Workout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
+		2594415A29F8491000A8BF8E /* WorkoutPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutPreview.swift; sourceTree = "<group>"; };
+		2594415E29F8531000A8BF8E /* CoverImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoverImageView.swift; sourceTree = "<group>"; };
+		2594416529F860A600A8BF8E /* LibraryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryViewModel.swift; sourceTree = "<group>"; };
 		25BB957329D36F3400CA1AEB /* LibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryView.swift; sourceTree = "<group>"; };
 		25BB957529D3703700CA1AEB /* LibraryCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryCellView.swift; sourceTree = "<group>"; };
 		25BB957729D37CB200CA1AEB /* sample-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sample-icon.png"; sourceTree = "<group>"; };
@@ -110,7 +121,6 @@
 		25D9AD4429D35DF700821C3F /* CircleGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleGroupView.swift; sourceTree = "<group>"; };
 		25D9AD4729D361B000821C3F /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		25D9AD4929D361E300821C3F /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		25E9CB8C29D43F3600CDF6EF /* WorkoutInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutInfo.swift; sourceTree = "<group>"; };
 		25E9CB8E29D43FEB00CDF6EF /* WorkoutDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutDetailsView.swift; sourceTree = "<group>"; };
 		48B5302D69832935977B6D17 /* Pods-PersonalCoach.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PersonalCoach.release.xcconfig"; path = "Target Support Files/Pods-PersonalCoach/Pods-PersonalCoach.release.xcconfig"; sourceTree = "<group>"; };
 		73ADF50E06CF536A24F64E07 /* Pods_PersonalCoach.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PersonalCoach.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -150,6 +160,22 @@
 				2594414429F8059B00A8BF8E /* Vectors.swift */,
 			);
 			path = PoseComparision;
+			sourceTree = "<group>";
+		};
+		2594414A29F81B5300A8BF8E /* DB */ = {
+			isa = PBXGroup;
+			children = (
+				2594414D29F8221600A8BF8E /* FirestoreManager.swift */,
+			);
+			path = DB;
+			sourceTree = "<group>";
+		};
+		2594416329F8604800A8BF8E /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				2594416529F860A600A8BF8E /* LibraryViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		25D335B029E31A5000D1B004 /* Extensions */ = {
@@ -220,10 +246,13 @@
 		25D9AD3429D3269E00821C3F /* PersonalCoach */ = {
 			isa = PBXGroup;
 			children = (
+				2594415329F82E3700A8BF8E /* GoogleService-Info.plist */,
+				2594414A29F81B5300A8BF8E /* DB */,
 				25D335B529E31F6200D1B004 /* ML */,
 				25D335B029E31A5000D1B004 /* Extensions */,
 				25E9CB8B29D43F2500CDF6EF /* Models */,
 				25D9AD4629D3617E00821C3F /* Screens */,
+				2594416329F8604800A8BF8E /* ViewModels */,
 				25D9AD4329D35DC600821C3F /* Views */,
 				25D9AD3529D3269E00821C3F /* PersonalCoachApp.swift */,
 				25BB957729D37CB200CA1AEB /* sample-icon.png */,
@@ -249,6 +278,7 @@
 				2594410929F69B9A00A8BF8E /* VideoDetection.swift */,
 				2594411F29F7133500A8BF8E /* VideoStreamer.swift */,
 				2594414829F8088A00A8BF8E /* OverlayView.swift */,
+				2594415E29F8531000A8BF8E /* CoverImageView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -269,9 +299,10 @@
 		25E9CB8B29D43F2500CDF6EF /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				25E9CB8C29D43F3600CDF6EF /* WorkoutInfo.swift */,
 				2594410729F6890D00A8BF8E /* CameraFeedManager.swift */,
 				2594410B29F69C1000A8BF8E /* VideoFeedManager.swift */,
+				2594415529F831AE00A8BF8E /* Workout.swift */,
+				2594415A29F8491000A8BF8E /* WorkoutPreview.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -304,6 +335,7 @@
 				25D9AD2E29D3269E00821C3F /* Sources */,
 				25D9AD2F29D3269E00821C3F /* Frameworks */,
 				25D9AD3029D3269E00821C3F /* Resources */,
+				BCB28C59D8E28AA1EB6D8DB1 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -368,6 +400,7 @@
 				2594413429F7EC6500A8BF8E /* coach-3-mirror.json in Resources */,
 				2594411729F6BB4300A8BF8E /* person-ex-2.mov in Resources */,
 				25D335D529E366E700D1B004 /* test.jpg in Resources */,
+				2594415429F82E3700A8BF8E /* GoogleService-Info.plist in Resources */,
 				2594413229F7EB7C00A8BF8E /* coach-3-mirror.mov in Resources */,
 				2594412A29F7CFCC00A8BF8E /* work2-mirror.mov in Resources */,
 				2594412429F7C22A00A8BF8E /* work2.mov in Resources */,
@@ -402,6 +435,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		BCB28C59D8E28AA1EB6D8DB1 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PersonalCoach/Pods-PersonalCoach-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PersonalCoach/Pods-PersonalCoach-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PersonalCoach/Pods-PersonalCoach-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -411,6 +461,7 @@
 			files = (
 				25D9AD3829D3269E00821C3F /* ContentView.swift in Sources */,
 				25D335BC29E3239C00D1B004 /* ComparisonManager.swift in Sources */,
+				2594415B29F8491000A8BF8E /* WorkoutPreview.swift in Sources */,
 				25D335A529E3196D00D1B004 /* PoseDetectionView.swift in Sources */,
 				25D9AD4829D361B000821C3F /* OnboardingView.swift in Sources */,
 				2594413E29F8039600A8BF8E /* DetectionArea.swift in Sources */,
@@ -422,20 +473,23 @@
 				2594414729F8066100A8BF8E /* Array.swift in Sources */,
 				25E9CB8F29D43FEB00CDF6EF /* WorkoutDetailsView.swift in Sources */,
 				25D335B229E31A6900D1B004 /* CGImage.swift in Sources */,
-				25E9CB8D29D43F3600CDF6EF /* WorkoutInfo.swift in Sources */,
 				25D9AD4A29D361E300821C3F /* HomeView.swift in Sources */,
 				25BB957629D3703700CA1AEB /* LibraryCellView.swift in Sources */,
 				25BB957429D36F3400CA1AEB /* LibraryView.swift in Sources */,
 				2594414529F8059B00A8BF8E /* Vectors.swift in Sources */,
 				25D335C529E33AC700D1B004 /* CVPixelBuffer.swift in Sources */,
 				2594410829F6890D00A8BF8E /* CameraFeedManager.swift in Sources */,
+				2594414E29F8221600A8BF8E /* FirestoreManager.swift in Sources */,
 				25D9AD3629D3269E00821C3F /* PersonalCoachApp.swift in Sources */,
 				25D335B729E3237900D1B004 /* PoseEstimator.swift in Sources */,
+				2594415629F831AE00A8BF8E /* Workout.swift in Sources */,
 				2594414329F8052600A8BF8E /* ComparisonMetric.swift in Sources */,
 				2594413A29F7F85A00A8BF8E /* EstimatorError.swift in Sources */,
+				2594415F29F8531000A8BF8E /* CoverImageView.swift in Sources */,
 				2594411E29F6DE7F00A8BF8E /* PositionComparer.swift in Sources */,
 				2594412029F7133500A8BF8E /* VideoStreamer.swift in Sources */,
 				2594413C29F7F88100A8BF8E /* Joint.swift in Sources */,
+				2594416629F860A600A8BF8E /* LibraryViewModel.swift in Sources */,
 				2594410A29F69B9A00A8BF8E /* VideoDetection.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -580,7 +634,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "-.PersonalCoach";
+				PRODUCT_BUNDLE_IDENTIFIER = com.personalcoach.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -611,7 +665,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "-.PersonalCoach";
+				PRODUCT_BUNDLE_IDENTIFIER = com.personalcoach.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
