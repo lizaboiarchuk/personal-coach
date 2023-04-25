@@ -18,7 +18,22 @@ struct LibraryCellView: View {
         case downloaded
     }
     
-    @State private var currentState: wState = .notDownloaded
+    @State private var currentState: wState
+    
+    init(workout: WorkoutPreview, delegate: DownloaderDelegate) {
+        self.workout = workout
+        self.delegate = delegate
+        
+        let fileManager = FileManager.default
+        let documentsUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        
+        if fileManager.fileExists(atPath: documentsUrl.appendingPathComponent("\(workout.uid).mp4").path) && fileManager.fileExists(atPath: documentsUrl.appendingPathComponent("\(workout.uid).json").path) {
+            self._currentState = State(initialValue: .downloaded)
+            } else {
+                self._currentState = State(initialValue: .notDownloaded)
+            }
+        }
+    
     
     var body: some View {
         

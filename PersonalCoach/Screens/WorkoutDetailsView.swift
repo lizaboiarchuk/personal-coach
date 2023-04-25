@@ -44,6 +44,9 @@ struct  WorkoutDetailsView: View {
                                             
                                         }
                                         Button(action: {
+                                            
+                                            
+                                            
                                             showCameraView = true
                                         }) {
                                             Image(systemName: "play.circle.fill")
@@ -51,7 +54,8 @@ struct  WorkoutDetailsView: View {
                                                 .background(Color.white)
                                                 .clipShape(Circle())
                                         }
-                                        NavigationLink(destination: PoseDetectionView(), isActive: $showCameraView) {
+                                        NavigationLink(destination: PoseDetectionView(localPositionsPath: self.workout.localPositionsPath,
+                                                                                      localVideoPath: self.workout.localVideoPath), isActive: $showCameraView) {
                                             EmptyView()
                                         }
                                         .hidden()

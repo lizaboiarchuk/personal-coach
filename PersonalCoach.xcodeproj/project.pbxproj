@@ -44,7 +44,6 @@
 		2594416829F866DF00A8BF8E /* DownloaderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2594416729F866DF00A8BF8E /* DownloaderDelegate.swift */; };
 		25BB957429D36F3400CA1AEB /* LibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BB957329D36F3400CA1AEB /* LibraryView.swift */; };
 		25BB957629D3703700CA1AEB /* LibraryCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BB957529D3703700CA1AEB /* LibraryCellView.swift */; };
-		25BB957829D37CB200CA1AEB /* sample-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 25BB957729D37CB200CA1AEB /* sample-icon.png */; };
 		25D335A529E3196D00D1B004 /* PoseDetectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D335A429E3196D00D1B004 /* PoseDetectionView.swift */; };
 		25D335B229E31A6900D1B004 /* CGImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D335B129E31A6900D1B004 /* CGImage.swift */; };
 		25D335B729E3237900D1B004 /* PoseEstimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D335B629E3237900D1B004 /* PoseEstimator.swift */; };
@@ -104,7 +103,6 @@
 		2594416729F866DF00A8BF8E /* DownloaderDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloaderDelegate.swift; sourceTree = "<group>"; };
 		25BB957329D36F3400CA1AEB /* LibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryView.swift; sourceTree = "<group>"; };
 		25BB957529D3703700CA1AEB /* LibraryCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryCellView.swift; sourceTree = "<group>"; };
-		25BB957729D37CB200CA1AEB /* sample-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sample-icon.png"; sourceTree = "<group>"; };
 		25D335A429E3196D00D1B004 /* PoseDetectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoseDetectionView.swift; sourceTree = "<group>"; };
 		25D335B129E31A6900D1B004 /* CGImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGImage.swift; sourceTree = "<group>"; };
 		25D335B629E3237900D1B004 /* PoseEstimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoseEstimator.swift; sourceTree = "<group>"; };
@@ -258,7 +256,6 @@
 				2594416329F8604800A8BF8E /* ViewModels */,
 				25D9AD4329D35DC600821C3F /* Views */,
 				25D9AD3529D3269E00821C3F /* PersonalCoachApp.swift */,
-				25BB957729D37CB200CA1AEB /* sample-icon.png */,
 				25D9AD3929D326A000821C3F /* Assets.xcassets */,
 				25D9AD3B29D326A000821C3F /* Preview Content */,
 			);
@@ -394,7 +391,6 @@
 				2594412829F7CAC000A8BF8E /* person2.mov in Resources */,
 				2577476829EACFF300698AAE /* movenet_thunder.tflite in Resources */,
 				2594412629F7C43000A8BF8E /* coachPositions2.json in Resources */,
-				25BB957829D37CB200CA1AEB /* sample-icon.png in Resources */,
 				25D335CA29E341A100D1B004 /* squat_1.jpeg in Resources */,
 				2594413029F7EA7C00A8BF8E /* coach-3.mov in Resources */,
 				2594410E29F69D4200A8BF8E /* person-ex-1.mov in Resources */,

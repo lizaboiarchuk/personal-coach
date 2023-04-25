@@ -15,20 +15,24 @@ import os
 // MARK: - View
 struct PoseDetectionView: View {
     @ObservedObject var viewModel = PoseDetectionViewModel()
+    
     @State private var showOverlay = true
     @State private var counter = 5
+    
+    var localPositionsPath: String?
+    var localVideoPath: String?
 
     var body: some View {
         ZStack {
             ZStack {
-                PoseDetectionViewControllerRepresentable(resultLabel: $viewModel.resultLabel, isPaused: $showOverlay)
+                PoseDetectionViewControllerRepresentable(resultLabel: $viewModel.resultLabel, isPaused: $showOverlay, positionsPath: localPositionsPath)
                     .aspectRatio(3.0/4.0, contentMode: .fill)
                     .frame(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height)
                     .edgesIgnoringSafeArea(.all)
                     .scaleEffect(x: -1, y: 1)
 
                 ZStack {
-                    VideoStreamerViewControllerRepresentable()
+                    VideoStreamerViewControllerRepresentable(videoPath: localVideoPath)
                         .frame(width: 300, height: 170)
                         .position(x: UIScreen.main.bounds.width * 0.60, y: UIScreen.main.bounds.height * 0.15)
                     VStack {
@@ -84,15 +88,19 @@ class PoseDetectionViewModel: ObservableObject {
 
 // MARK: - ViewControllerRepresentable
 struct PoseDetectionViewControllerRepresentable: UIViewControllerRepresentable {
+    
     typealias UIViewControllerType = PoseDetectionViewController
     
     @Binding var resultLabel: String
     @Binding var isPaused: Bool
+    var positionsPath: String?
 
     func makeUIViewController(context: Context) -> PoseDetectionViewController {
         let viewController = PoseDetectionViewController()
         viewController.resultLabelBinding = $resultLabel
         viewController.isPaused = isPaused
+        viewController.positionsPath = positionsPath
+        
         return viewController
     }
 
@@ -111,17 +119,30 @@ final class PoseDetectionViewController: UIViewController {
     private let queue = DispatchQueue(label: "serial_queue")
     private var isRunning = false
     private var overlayView: OverlayView!
-    private var comparer = ComparisonManager()
+    private var comparer: ComparisonManager?
     private var overlayTreshold: Float = 0.2
     private var evalTreshold: Float = 1.3
     var resultLabelBinding: Binding<String>?
     var isPaused: Bool = true
+    var positionsPath: String?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupPoseComparer()
         setupOverlayView()
         initModel()
         configCameraCapture()
+    }
+    
+    private func setupPoseComparer() {
+        if let path = positionsPath {
+            do {
+                self.comparer = try ComparisonManager(path: path)
+            }
+            catch {
+            }
+        }
     }
     
     private func setupOverlayView() {
@@ -170,13 +191,14 @@ extension PoseDetectionViewController: CameraFeedManagerDelegate {
     private func runModel(_ pixelBuffer: CVPixelBuffer) {
         guard !isRunning else { return }
         guard let estimator = poseEstimator else { return }
+        guard let comparer = self.comparer else { return }
         queue.async {
             self.isRunning = true
             defer { self.isRunning = false }
             do {
                 let (keypoints, score, _, positionsArray) = try estimator.detectPose(on: pixelBuffer)
-                let (evalScore, evalFinished) = self.comparer.receive(positions: positionsArray)
-                var deviatedLines = self.comparer.getDeviatedLines()
+                let (evalScore, evalFinished) = comparer.receive(positions: positionsArray)
+                var deviatedLines = comparer.getDeviatedLines()
                 DispatchQueue.main.async { [self] in
                     var newLabel = "... \(evalScore)"
                     if evalFinished {

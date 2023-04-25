@@ -30,36 +30,43 @@ struct VideoStreamerViewControllerRepresentable: UIViewControllerRepresentable {
     
     typealias UIViewControllerType = VideoStreamerViewController
     
+    var videoPath: String?
+    
     func makeUIViewController(context: Context) -> VideoStreamerViewController {
+        print(videoPath)
         let viewController = VideoStreamerViewController()
+        viewController.videoPath = videoPath
         return viewController
     }
 
-    func updateUIViewController(_ uiViewController: VideoStreamerViewController, context: Context) {}
-    
-    class Coordinator {
-        var shouldStartVideo: Bool = false
-        let videoFeedManager: VideoFeedManager
-        
-        init(videoFeedManager: VideoFeedManager) {
-            self.videoFeedManager = videoFeedManager
-        }
-        
-        @objc func startVideo() {
-            if shouldStartVideo {
-                videoFeedManager.startVideo()
-                shouldStartVideo = false
-            }
-        }
-    }
-    
-    func makeCoordinator() -> Coordinator {
-        let videoFeedManager = VideoFeedManager(url: Bundle.main.url(forResource: "coach_1_ex", withExtension: "mp4")!)
-        let coordinator = Coordinator(videoFeedManager: videoFeedManager)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 6, execute: coordinator.startVideo)
-        coordinator.shouldStartVideo = true
-        return coordinator
-    }
+//    func updateUIViewController(_ uiViewController: VideoStreamerViewController, context: Context) {}
+//
+//    class Coordinator {
+//        var shouldStartVideo: Bool = false
+//        let videoFeedManager: VideoFeedManager
+//
+//        init(videoFeedManager: VideoFeedManager) {
+//            self.videoFeedManager = videoFeedManager
+//        }
+//
+//        @objc func startVideo() {
+//            if shouldStartVideo {
+//                videoFeedManager.startVideo()
+//                shouldStartVideo = false
+//            }
+//        }
+//    }
+//
+//    func makeCoordinator() -> Coordinator {
+//
+//
+//
+//        let videoFeedManager = VideoFeedManager(url: Bundle.main.url(forResource: "coach_1_ex", withExtension: "mp4")!)
+//        let coordinator = Coordinator(videoFeedManager: videoFeedManager)
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 6, execute: coordinator.startVideo)
+//        coordinator.shouldStartVideo = true
+//        return coordinator
+//    }
 }
 
 
@@ -69,6 +76,7 @@ final class VideoStreamerViewController: UIViewController {
     private var videoFeedManager: VideoFeedManager!
     private var playerLayer: AVPlayerLayer!
     private var shouldStartVideo: Bool = false
+    var videoPath: String?
     
     // MARK: View Handling Methods
     override func viewDidLoad() {
@@ -99,9 +107,15 @@ final class VideoStreamerViewController: UIViewController {
     }
     
     private func configVideoCapture() {
-        guard let videoURL = Bundle.main.url(forResource: "coach-3", withExtension: "mov") else {
-            fatalError("Failed to find video file.")
+
+        print(self.videoPath)
+        guard let vp = self.videoPath else { fatalError("Failed to find downloaded video file.") }
+        let fileManager = FileManager.default
+        if !fileManager.fileExists(atPath: vp)  {
+            fatalError("Failed to find downloaded video file.")
         }
+        let videoURL = URL(fileURLWithPath: vp)
+
         videoFeedManager = VideoFeedManager(url: videoURL)
         videoFeedManager.delegate = self
         

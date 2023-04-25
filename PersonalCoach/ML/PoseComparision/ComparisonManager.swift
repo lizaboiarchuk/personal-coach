@@ -18,24 +18,27 @@ final class ComparisonManager {
     
     
     //MARK: - Init
-    init() {
-        if let url = Bundle.main.url(forResource: "coach-3-mirror", withExtension: "json") {
-            do {
-                let jsonData = try Data(contentsOf: url)
-                let jsonObject = try JSONSerialization.jsonObject(with: jsonData, options: [])
-                let jsonDataEncoded = try JSONSerialization.data(withJSONObject: jsonObject)
-                let jsonString = String(data: jsonDataEncoded, encoding: .utf8)
-                let myData = try decoder.decode(PrecalculatedPositionsData.self, from: jsonDataEncoded)
-                self.tagretPositions = myData.array
-            } catch {
-                self.tagretPositions = []
-            }
+    init(path: String) throws {
+        
+        let fileManager = FileManager.default
+        if fileManager.fileExists(atPath: path) {
+            
+            let url = URL(fileURLWithPath: path)
+                do {
+                    let jsonData = try Data(contentsOf: url)
+                    let jsonObject = try JSONSerialization.jsonObject(with: jsonData, options: [])
+                    let jsonDataEncoded = try JSONSerialization.data(withJSONObject: jsonObject)
+                    let jsonString = String(data: jsonDataEncoded, encoding: .utf8)
+                    let myData = try decoder.decode(PrecalculatedPositionsData.self, from: jsonDataEncoded)
+                    self.tagretPositions = myData.array
+                } catch {
+                    self.tagretPositions = []
+                }
+
+            self.aligner = PositionComparer(targetSequence: self.tagretPositions)
+            self.aligner.prepare()
         }
-        else {
-            self.tagretPositions = []
-        }
-        self.aligner = PositionComparer(targetSequence: self.tagretPositions)
-        self.aligner.prepare()
+        else { throw fatalError("Unable to access saved vide.") }
     }
     
      
