@@ -3,13 +3,51 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2577476829EACFF300698AAE /* movenet_thunder.tflite in Resources */ = {isa = PBXBuildFile; fileRef = 2577476729EACDA700698AAE /* movenet_thunder.tflite */; };
+		2594410829F6890D00A8BF8E /* CameraFeedManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2594410729F6890D00A8BF8E /* CameraFeedManager.swift */; };
+		2594410A29F69B9A00A8BF8E /* VideoDetection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2594410929F69B9A00A8BF8E /* VideoDetection.swift */; };
+		2594410C29F69C1000A8BF8E /* VideoFeedManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2594410B29F69C1000A8BF8E /* VideoFeedManager.swift */; };
+		2594410E29F69D4200A8BF8E /* person-ex-1.mov in Resources */ = {isa = PBXBuildFile; fileRef = 2594410D29F69D4200A8BF8E /* person-ex-1.mov */; };
+		2594411029F69ECB00A8BF8E /* coach_1_ex.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 2594410F29F69EC500A8BF8E /* coach_1_ex.mp4 */; };
+		2594411729F6BB4300A8BF8E /* person-ex-2.mov in Resources */ = {isa = PBXBuildFile; fileRef = 2594411529F6BB4200A8BF8E /* person-ex-2.mov */; };
+		2594411829F6BB4300A8BF8E /* person-ex-3.mov in Resources */ = {isa = PBXBuildFile; fileRef = 2594411629F6BB4200A8BF8E /* person-ex-3.mov */; };
+		2594411C29F6D8D100A8BF8E /* coachPositions.json in Resources */ = {isa = PBXBuildFile; fileRef = 2594411B29F6D8D100A8BF8E /* coachPositions.json */; };
+		2594411E29F6DE7F00A8BF8E /* PositionComparer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2594411D29F6DE7F00A8BF8E /* PositionComparer.swift */; };
+		2594412029F7133500A8BF8E /* VideoStreamer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2594411F29F7133500A8BF8E /* VideoStreamer.swift */; };
+		2594412429F7C22A00A8BF8E /* work2.mov in Resources */ = {isa = PBXBuildFile; fileRef = 2594412329F7C22A00A8BF8E /* work2.mov */; };
+		2594412629F7C43000A8BF8E /* coachPositions2.json in Resources */ = {isa = PBXBuildFile; fileRef = 2594412529F7C43000A8BF8E /* coachPositions2.json */; };
+		2594412829F7CAC000A8BF8E /* person2.mov in Resources */ = {isa = PBXBuildFile; fileRef = 2594412729F7CAC000A8BF8E /* person2.mov */; };
+		2594412A29F7CFCC00A8BF8E /* work2-mirror.mov in Resources */ = {isa = PBXBuildFile; fileRef = 2594412929F7CFCC00A8BF8E /* work2-mirror.mov */; };
+		2594412C29F7D15F00A8BF8E /* coachPositions3.json in Resources */ = {isa = PBXBuildFile; fileRef = 2594412B29F7D15F00A8BF8E /* coachPositions3.json */; };
+		2594412E29F7E0AF00A8BF8E /* user-2.mov in Resources */ = {isa = PBXBuildFile; fileRef = 2594412D29F7E0AF00A8BF8E /* user-2.mov */; };
+		2594413029F7EA7C00A8BF8E /* coach-3.mov in Resources */ = {isa = PBXBuildFile; fileRef = 2594412F29F7EA7C00A8BF8E /* coach-3.mov */; };
+		2594413229F7EB7C00A8BF8E /* coach-3-mirror.mov in Resources */ = {isa = PBXBuildFile; fileRef = 2594413129F7EB7C00A8BF8E /* coach-3-mirror.mov */; };
+		2594413429F7EC6500A8BF8E /* coach-3-mirror.json in Resources */ = {isa = PBXBuildFile; fileRef = 2594413329F7EC6500A8BF8E /* coach-3-mirror.json */; };
+		2594413A29F7F85A00A8BF8E /* EstimatorError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2594413929F7F85A00A8BF8E /* EstimatorError.swift */; };
+		2594413C29F7F88100A8BF8E /* Joint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2594413B29F7F88100A8BF8E /* Joint.swift */; };
+		2594413E29F8039600A8BF8E /* DetectionArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2594413D29F8039600A8BF8E /* DetectionArea.swift */; };
+		2594414129F804D900A8BF8E /* DTW.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2594414029F804D900A8BF8E /* DTW.swift */; };
+		2594414329F8052600A8BF8E /* ComparisonMetric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2594414229F8052600A8BF8E /* ComparisonMetric.swift */; };
+		2594414529F8059B00A8BF8E /* Vectors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2594414429F8059B00A8BF8E /* Vectors.swift */; };
+		2594414729F8066100A8BF8E /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2594414629F8066100A8BF8E /* Array.swift */; };
+		2594414929F8088A00A8BF8E /* OverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2594414829F8088A00A8BF8E /* OverlayView.swift */; };
 		25BB957429D36F3400CA1AEB /* LibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BB957329D36F3400CA1AEB /* LibraryView.swift */; };
 		25BB957629D3703700CA1AEB /* LibraryCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BB957529D3703700CA1AEB /* LibraryCellView.swift */; };
 		25BB957829D37CB200CA1AEB /* sample-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 25BB957729D37CB200CA1AEB /* sample-icon.png */; };
+		25D335A529E3196D00D1B004 /* PoseDetectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D335A429E3196D00D1B004 /* PoseDetectionView.swift */; };
+		25D335B229E31A6900D1B004 /* CGImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D335B129E31A6900D1B004 /* CGImage.swift */; };
+		25D335B729E3237900D1B004 /* PoseEstimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D335B629E3237900D1B004 /* PoseEstimator.swift */; };
+		25D335BC29E3239C00D1B004 /* ComparisonManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D335BB29E3239C00D1B004 /* ComparisonManager.swift */; };
+		25D335C529E33AC700D1B004 /* CVPixelBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D335C429E33AC700D1B004 /* CVPixelBuffer.swift */; };
+		25D335C729E33AE300D1B004 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D335C629E33AE300D1B004 /* Data.swift */; };
+		25D335CA29E341A100D1B004 /* squat_1.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 25D335C829E341A100D1B004 /* squat_1.jpeg */; };
+		25D335D129E34CCB00D1B004 /* nahil_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 25D335D029E34CCA00D1B004 /* nahil_1.png */; };
+		25D335D329E34E8400D1B004 /* s.png in Resources */ = {isa = PBXBuildFile; fileRef = 25D335D229E34E8400D1B004 /* s.png */; };
+		25D335D529E366E700D1B004 /* test.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 25D335D429E366E700D1B004 /* test.jpg */; };
 		25D9AD3629D3269E00821C3F /* PersonalCoachApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D9AD3529D3269E00821C3F /* PersonalCoachApp.swift */; };
 		25D9AD3829D3269E00821C3F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D9AD3729D3269E00821C3F /* ContentView.swift */; };
 		25D9AD3A29D326A000821C3F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 25D9AD3929D326A000821C3F /* Assets.xcassets */; };
@@ -19,12 +57,51 @@
 		25D9AD4A29D361E300821C3F /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D9AD4929D361E300821C3F /* HomeView.swift */; };
 		25E9CB8D29D43F3600CDF6EF /* WorkoutInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E9CB8C29D43F3600CDF6EF /* WorkoutInfo.swift */; };
 		25E9CB8F29D43FEB00CDF6EF /* WorkoutDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E9CB8E29D43FEB00CDF6EF /* WorkoutDetailsView.swift */; };
+		9E2B4713425471587C83FF2F /* Pods_PersonalCoach.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73ADF50E06CF536A24F64E07 /* Pods_PersonalCoach.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2577476729EACDA700698AAE /* movenet_thunder.tflite */ = {isa = PBXFileReference; lastKnownFileType = file; path = movenet_thunder.tflite; sourceTree = "<group>"; };
+		2594410729F6890D00A8BF8E /* CameraFeedManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraFeedManager.swift; sourceTree = "<group>"; };
+		2594410929F69B9A00A8BF8E /* VideoDetection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDetection.swift; sourceTree = "<group>"; };
+		2594410B29F69C1000A8BF8E /* VideoFeedManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoFeedManager.swift; sourceTree = "<group>"; };
+		2594410D29F69D4200A8BF8E /* person-ex-1.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "person-ex-1.mov"; sourceTree = "<group>"; };
+		2594410F29F69EC500A8BF8E /* coach_1_ex.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = coach_1_ex.mp4; sourceTree = "<group>"; };
+		2594411529F6BB4200A8BF8E /* person-ex-2.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "person-ex-2.mov"; sourceTree = "<group>"; };
+		2594411629F6BB4200A8BF8E /* person-ex-3.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "person-ex-3.mov"; sourceTree = "<group>"; };
+		2594411B29F6D8D100A8BF8E /* coachPositions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = coachPositions.json; sourceTree = "<group>"; };
+		2594411D29F6DE7F00A8BF8E /* PositionComparer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositionComparer.swift; sourceTree = "<group>"; };
+		2594411F29F7133500A8BF8E /* VideoStreamer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoStreamer.swift; sourceTree = "<group>"; };
+		2594412329F7C22A00A8BF8E /* work2.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = work2.mov; sourceTree = "<group>"; };
+		2594412529F7C43000A8BF8E /* coachPositions2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = coachPositions2.json; sourceTree = "<group>"; };
+		2594412729F7CAC000A8BF8E /* person2.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = person2.mov; sourceTree = "<group>"; };
+		2594412929F7CFCC00A8BF8E /* work2-mirror.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "work2-mirror.mov"; sourceTree = "<group>"; };
+		2594412B29F7D15F00A8BF8E /* coachPositions3.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = coachPositions3.json; sourceTree = "<group>"; };
+		2594412D29F7E0AF00A8BF8E /* user-2.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "user-2.mov"; sourceTree = "<group>"; };
+		2594412F29F7EA7C00A8BF8E /* coach-3.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "coach-3.mov"; sourceTree = "<group>"; };
+		2594413129F7EB7C00A8BF8E /* coach-3-mirror.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "coach-3-mirror.mov"; sourceTree = "<group>"; };
+		2594413329F7EC6500A8BF8E /* coach-3-mirror.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "coach-3-mirror.json"; sourceTree = "<group>"; };
+		2594413929F7F85A00A8BF8E /* EstimatorError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstimatorError.swift; sourceTree = "<group>"; };
+		2594413B29F7F88100A8BF8E /* Joint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Joint.swift; sourceTree = "<group>"; };
+		2594413D29F8039600A8BF8E /* DetectionArea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectionArea.swift; sourceTree = "<group>"; };
+		2594414029F804D900A8BF8E /* DTW.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DTW.swift; sourceTree = "<group>"; };
+		2594414229F8052600A8BF8E /* ComparisonMetric.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComparisonMetric.swift; sourceTree = "<group>"; };
+		2594414429F8059B00A8BF8E /* Vectors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vectors.swift; sourceTree = "<group>"; };
+		2594414629F8066100A8BF8E /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
+		2594414829F8088A00A8BF8E /* OverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayView.swift; sourceTree = "<group>"; };
 		25BB957329D36F3400CA1AEB /* LibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryView.swift; sourceTree = "<group>"; };
 		25BB957529D3703700CA1AEB /* LibraryCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryCellView.swift; sourceTree = "<group>"; };
 		25BB957729D37CB200CA1AEB /* sample-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sample-icon.png"; sourceTree = "<group>"; };
+		25D335A429E3196D00D1B004 /* PoseDetectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoseDetectionView.swift; sourceTree = "<group>"; };
+		25D335B129E31A6900D1B004 /* CGImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGImage.swift; sourceTree = "<group>"; };
+		25D335B629E3237900D1B004 /* PoseEstimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoseEstimator.swift; sourceTree = "<group>"; };
+		25D335BB29E3239C00D1B004 /* ComparisonManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComparisonManager.swift; sourceTree = "<group>"; };
+		25D335C429E33AC700D1B004 /* CVPixelBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVPixelBuffer.swift; sourceTree = "<group>"; };
+		25D335C629E33AE300D1B004 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		25D335C829E341A100D1B004 /* squat_1.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = squat_1.jpeg; sourceTree = "<group>"; };
+		25D335D029E34CCA00D1B004 /* nahil_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nahil_1.png; sourceTree = "<group>"; };
+		25D335D229E34E8400D1B004 /* s.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = s.png; sourceTree = "<group>"; };
+		25D335D429E366E700D1B004 /* test.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = test.jpg; sourceTree = "<group>"; };
 		25D9AD3229D3269E00821C3F /* PersonalCoach.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PersonalCoach.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		25D9AD3529D3269E00821C3F /* PersonalCoachApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalCoachApp.swift; sourceTree = "<group>"; };
 		25D9AD3729D3269E00821C3F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -35,6 +112,9 @@
 		25D9AD4929D361E300821C3F /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		25E9CB8C29D43F3600CDF6EF /* WorkoutInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutInfo.swift; sourceTree = "<group>"; };
 		25E9CB8E29D43FEB00CDF6EF /* WorkoutDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutDetailsView.swift; sourceTree = "<group>"; };
+		48B5302D69832935977B6D17 /* Pods-PersonalCoach.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PersonalCoach.release.xcconfig"; path = "Target Support Files/Pods-PersonalCoach/Pods-PersonalCoach.release.xcconfig"; sourceTree = "<group>"; };
+		73ADF50E06CF536A24F64E07 /* Pods_PersonalCoach.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PersonalCoach.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E84DBF3E8DBA0CFFDF14AFF8 /* Pods-PersonalCoach.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PersonalCoach.debug.xcconfig"; path = "Target Support Files/Pods-PersonalCoach/Pods-PersonalCoach.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,17 +122,90 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E2B4713425471587C83FF2F /* Pods_PersonalCoach.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2594413629F7F82400A8BF8E /* PoseEstimation */ = {
+			isa = PBXGroup;
+			children = (
+				25D335B629E3237900D1B004 /* PoseEstimator.swift */,
+				2594413929F7F85A00A8BF8E /* EstimatorError.swift */,
+				2594413B29F7F88100A8BF8E /* Joint.swift */,
+				2594413D29F8039600A8BF8E /* DetectionArea.swift */,
+			);
+			path = PoseEstimation;
+			sourceTree = "<group>";
+		};
+		2594413F29F804AB00A8BF8E /* PoseComparision */ = {
+			isa = PBXGroup;
+			children = (
+				2594411D29F6DE7F00A8BF8E /* PositionComparer.swift */,
+				25D335BB29E3239C00D1B004 /* ComparisonManager.swift */,
+				2594414029F804D900A8BF8E /* DTW.swift */,
+				2594414229F8052600A8BF8E /* ComparisonMetric.swift */,
+				2594414429F8059B00A8BF8E /* Vectors.swift */,
+			);
+			path = PoseComparision;
+			sourceTree = "<group>";
+		};
+		25D335B029E31A5000D1B004 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				2594414629F8066100A8BF8E /* Array.swift */,
+				25D335B129E31A6900D1B004 /* CGImage.swift */,
+				25D335C629E33AE300D1B004 /* Data.swift */,
+				25D335C429E33AC700D1B004 /* CVPixelBuffer.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		25D335B529E31F6200D1B004 /* ML */ = {
+			isa = PBXGroup;
+			children = (
+				2594413F29F804AB00A8BF8E /* PoseComparision */,
+				2594413629F7F82400A8BF8E /* PoseEstimation */,
+				25D335C129E323F800D1B004 /* Files */,
+			);
+			path = ML;
+			sourceTree = "<group>";
+		};
+		25D335C129E323F800D1B004 /* Files */ = {
+			isa = PBXGroup;
+			children = (
+				2594412D29F7E0AF00A8BF8E /* user-2.mov */,
+				2594413129F7EB7C00A8BF8E /* coach-3-mirror.mov */,
+				2594413329F7EC6500A8BF8E /* coach-3-mirror.json */,
+				2594412B29F7D15F00A8BF8E /* coachPositions3.json */,
+				2594412529F7C43000A8BF8E /* coachPositions2.json */,
+				2594412329F7C22A00A8BF8E /* work2.mov */,
+				2594411B29F6D8D100A8BF8E /* coachPositions.json */,
+				2594411529F6BB4200A8BF8E /* person-ex-2.mov */,
+				2594411629F6BB4200A8BF8E /* person-ex-3.mov */,
+				2594410F29F69EC500A8BF8E /* coach_1_ex.mp4 */,
+				2594410D29F69D4200A8BF8E /* person-ex-1.mov */,
+				2594412929F7CFCC00A8BF8E /* work2-mirror.mov */,
+				2594412729F7CAC000A8BF8E /* person2.mov */,
+				2594412F29F7EA7C00A8BF8E /* coach-3.mov */,
+				2577476729EACDA700698AAE /* movenet_thunder.tflite */,
+				25D335D429E366E700D1B004 /* test.jpg */,
+				25D335D029E34CCA00D1B004 /* nahil_1.png */,
+				25D335D229E34E8400D1B004 /* s.png */,
+				25D335C829E341A100D1B004 /* squat_1.jpeg */,
+			);
+			path = Files;
+			sourceTree = "<group>";
+		};
 		25D9AD2929D3269E00821C3F = {
 			isa = PBXGroup;
 			children = (
 				25D9AD3429D3269E00821C3F /* PersonalCoach */,
 				25D9AD3329D3269E00821C3F /* Products */,
+				7D3F73719C42E438F7DBEAF0 /* Pods */,
+				D7C35C969836392B7AAC79F4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -67,11 +220,13 @@
 		25D9AD3429D3269E00821C3F /* PersonalCoach */ = {
 			isa = PBXGroup;
 			children = (
+				25D335B529E31F6200D1B004 /* ML */,
+				25D335B029E31A5000D1B004 /* Extensions */,
 				25E9CB8B29D43F2500CDF6EF /* Models */,
-				25BB957729D37CB200CA1AEB /* sample-icon.png */,
 				25D9AD4629D3617E00821C3F /* Screens */,
 				25D9AD4329D35DC600821C3F /* Views */,
 				25D9AD3529D3269E00821C3F /* PersonalCoachApp.swift */,
+				25BB957729D37CB200CA1AEB /* sample-icon.png */,
 				25D9AD3929D326A000821C3F /* Assets.xcassets */,
 				25D9AD3B29D326A000821C3F /* Preview Content */,
 			);
@@ -91,7 +246,9 @@
 			children = (
 				25D9AD4429D35DF700821C3F /* CircleGroupView.swift */,
 				25BB957529D3703700CA1AEB /* LibraryCellView.swift */,
-				25E9CB8E29D43FEB00CDF6EF /* WorkoutDetailsView.swift */,
+				2594410929F69B9A00A8BF8E /* VideoDetection.swift */,
+				2594411F29F7133500A8BF8E /* VideoStreamer.swift */,
+				2594414829F8088A00A8BF8E /* OverlayView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -103,6 +260,8 @@
 				25D9AD4729D361B000821C3F /* OnboardingView.swift */,
 				25D9AD4929D361E300821C3F /* HomeView.swift */,
 				25BB957329D36F3400CA1AEB /* LibraryView.swift */,
+				25E9CB8E29D43FEB00CDF6EF /* WorkoutDetailsView.swift */,
+				25D335A429E3196D00D1B004 /* PoseDetectionView.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -111,8 +270,27 @@
 			isa = PBXGroup;
 			children = (
 				25E9CB8C29D43F3600CDF6EF /* WorkoutInfo.swift */,
+				2594410729F6890D00A8BF8E /* CameraFeedManager.swift */,
+				2594410B29F69C1000A8BF8E /* VideoFeedManager.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		7D3F73719C42E438F7DBEAF0 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E84DBF3E8DBA0CFFDF14AFF8 /* Pods-PersonalCoach.debug.xcconfig */,
+				48B5302D69832935977B6D17 /* Pods-PersonalCoach.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		D7C35C969836392B7AAC79F4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				73ADF50E06CF536A24F64E07 /* Pods_PersonalCoach.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -122,6 +300,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 25D9AD4029D326A000821C3F /* Build configuration list for PBXNativeTarget "PersonalCoach" */;
 			buildPhases = (
+				A3F959A0264E38D4641215B6 /* [CP] Check Pods Manifest.lock */,
 				25D9AD2E29D3269E00821C3F /* Sources */,
 				25D9AD2F29D3269E00821C3F /* Frameworks */,
 				25D9AD3029D3269E00821C3F /* Resources */,
@@ -151,7 +330,7 @@
 				};
 			};
 			buildConfigurationList = 25D9AD2D29D3269E00821C3F /* Build configuration list for PBXProject "PersonalCoach" */;
-			compatibilityVersion = "Xcode 14.0";
+			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -173,13 +352,57 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				25D335D329E34E8400D1B004 /* s.png in Resources */,
 				25D9AD3D29D326A000821C3F /* Preview Assets.xcassets in Resources */,
+				25D335D129E34CCB00D1B004 /* nahil_1.png in Resources */,
+				2594411029F69ECB00A8BF8E /* coach_1_ex.mp4 in Resources */,
+				2594412829F7CAC000A8BF8E /* person2.mov in Resources */,
+				2577476829EACFF300698AAE /* movenet_thunder.tflite in Resources */,
+				2594412629F7C43000A8BF8E /* coachPositions2.json in Resources */,
 				25BB957829D37CB200CA1AEB /* sample-icon.png in Resources */,
+				25D335CA29E341A100D1B004 /* squat_1.jpeg in Resources */,
+				2594413029F7EA7C00A8BF8E /* coach-3.mov in Resources */,
+				2594410E29F69D4200A8BF8E /* person-ex-1.mov in Resources */,
+				2594411829F6BB4300A8BF8E /* person-ex-3.mov in Resources */,
 				25D9AD3A29D326A000821C3F /* Assets.xcassets in Resources */,
+				2594413429F7EC6500A8BF8E /* coach-3-mirror.json in Resources */,
+				2594411729F6BB4300A8BF8E /* person-ex-2.mov in Resources */,
+				25D335D529E366E700D1B004 /* test.jpg in Resources */,
+				2594413229F7EB7C00A8BF8E /* coach-3-mirror.mov in Resources */,
+				2594412A29F7CFCC00A8BF8E /* work2-mirror.mov in Resources */,
+				2594412429F7C22A00A8BF8E /* work2.mov in Resources */,
+				2594411C29F6D8D100A8BF8E /* coachPositions.json in Resources */,
+				2594412E29F7E0AF00A8BF8E /* user-2.mov in Resources */,
+				2594412C29F7D15F00A8BF8E /* coachPositions3.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A3F959A0264E38D4641215B6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PersonalCoach-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		25D9AD2E29D3269E00821C3F /* Sources */ = {
@@ -187,14 +410,33 @@
 			buildActionMask = 2147483647;
 			files = (
 				25D9AD3829D3269E00821C3F /* ContentView.swift in Sources */,
+				25D335BC29E3239C00D1B004 /* ComparisonManager.swift in Sources */,
+				25D335A529E3196D00D1B004 /* PoseDetectionView.swift in Sources */,
 				25D9AD4829D361B000821C3F /* OnboardingView.swift in Sources */,
+				2594413E29F8039600A8BF8E /* DetectionArea.swift in Sources */,
+				2594410C29F69C1000A8BF8E /* VideoFeedManager.swift in Sources */,
+				25D335C729E33AE300D1B004 /* Data.swift in Sources */,
 				25D9AD4529D35DF700821C3F /* CircleGroupView.swift in Sources */,
+				2594414129F804D900A8BF8E /* DTW.swift in Sources */,
+				2594414929F8088A00A8BF8E /* OverlayView.swift in Sources */,
+				2594414729F8066100A8BF8E /* Array.swift in Sources */,
 				25E9CB8F29D43FEB00CDF6EF /* WorkoutDetailsView.swift in Sources */,
+				25D335B229E31A6900D1B004 /* CGImage.swift in Sources */,
 				25E9CB8D29D43F3600CDF6EF /* WorkoutInfo.swift in Sources */,
 				25D9AD4A29D361E300821C3F /* HomeView.swift in Sources */,
 				25BB957629D3703700CA1AEB /* LibraryCellView.swift in Sources */,
 				25BB957429D36F3400CA1AEB /* LibraryView.swift in Sources */,
+				2594414529F8059B00A8BF8E /* Vectors.swift in Sources */,
+				25D335C529E33AC700D1B004 /* CVPixelBuffer.swift in Sources */,
+				2594410829F6890D00A8BF8E /* CameraFeedManager.swift in Sources */,
 				25D9AD3629D3269E00821C3F /* PersonalCoachApp.swift in Sources */,
+				25D335B729E3237900D1B004 /* PoseEstimator.swift in Sources */,
+				2594414329F8052600A8BF8E /* ComparisonMetric.swift in Sources */,
+				2594413A29F7F85A00A8BF8E /* EstimatorError.swift in Sources */,
+				2594411E29F6DE7F00A8BF8E /* PositionComparer.swift in Sources */,
+				2594412029F7133500A8BF8E /* VideoStreamer.swift in Sources */,
+				2594413C29F7F88100A8BF8E /* Joint.swift in Sources */,
+				2594410A29F69B9A00A8BF8E /* VideoDetection.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -317,6 +559,7 @@
 		};
 		25D9AD4129D326A000821C3F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E84DBF3E8DBA0CFFDF14AFF8 /* Pods-PersonalCoach.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -326,6 +569,7 @@
 				DEVELOPMENT_TEAM = LFFMNMF4GK;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Requires camera access to track your moves";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -346,6 +590,7 @@
 		};
 		25D9AD4229D326A000821C3F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 48B5302D69832935977B6D17 /* Pods-PersonalCoach.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -355,6 +600,7 @@
 				DEVELOPMENT_TEAM = LFFMNMF4GK;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Requires camera access to track your moves";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
