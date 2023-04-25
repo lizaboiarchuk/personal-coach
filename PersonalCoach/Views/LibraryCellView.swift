@@ -9,8 +9,17 @@ import SwiftUI
 
 struct LibraryCellView: View {
     
-    var workout: WorkoutPreview
-
+    let workout: WorkoutPreview
+    let delegate: DownloaderDelegate
+    
+    private enum wState {
+        case notDownloaded
+        case downloading
+        case downloaded
+    }
+    
+    @State private var currentState: wState = .notDownloaded
+    
     var body: some View {
         
         HStack(alignment: .center) {
@@ -34,21 +43,48 @@ struct LibraryCellView: View {
 
             // MARK: BUTTONS
             HStack(spacing: 10) {
-                Button(action: {
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    print("Download button tapped")
-                }) {
-                    Image(systemName: "icloud.and.arrow.down")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 25, height: 25)
-                        .tint(Color("ColorDarkGreen"))
+                
+                ZStack {
+                    if currentState == .downloading {
+                        ProgressView()
+                            .progressViewStyle(CircularProgressViewStyle(tint: Color(UIColor.darkGray)))
+                    }
+                    else {
+                        
+                        Button(action: {
+                            
+                            self.currentState = .downloading
+                            self.delegate.downloadWorkout(videoStoragePath: self.workout.video,
+                                                          positionsStoragePath: self.workout.positions,
+                                                          videoFileName: "\(workout.uid).mp4",
+                                                          positionsFileName: "\(workout.uid).json") { localVideoPath, localPositionsPath in
+                                if let lvp = localVideoPath, let lpp = localPositionsPath {
+                                    self.workout.localVideoPath = lvp
+                                    self.workout.localPositionsPath = lpp
+                                    self.workout.isDownloaded = true
+                                    self.currentState = .downloaded
+                                } else {
+                                    self.currentState = .notDownloaded
+                                    
+                                }
+                            }
+                            
+                        }) {
+                            Image(systemName: self.currentState == .downloaded ? "checkmark.circle.fill" : "icloud.and.arrow.down")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 25, height: 25)
+                                .tint(Color("ColorDarkGreen"))
+                            
+                        }
+                        .disabled(self.currentState == .downloaded)
+                        .onChange(of: workout.isDownloaded) { newValue in
+                            if newValue {
+                                
+                            } else {
+                            }
+                        }
+                    }
                 }
 
                 Button(action: {

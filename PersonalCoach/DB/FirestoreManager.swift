@@ -46,17 +46,31 @@ class FirestoreManager {
         }
     }
     
-//    func downloadAndSaveFile(from url: String, fileName: String, completion: @escaping (String?) -> Void) {
-//        let storageRef = storage.reference(forURL: url)
-//        let documentsUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-//        let destinationUrl = documentsUrl.appendingPathComponent(fileName)
-//        let downloadTask = storageRef.write(toFile: destinationUrl)
-//        downloadTask.observe(.success) { _ in
-//            completion(destinationUrl.path)
-//        }
-//        downloadTask.observe(.failure) { error in
-//            print("Error downloading file: \(error.localizedDescription)")
-//            completion(nil)
-//        }
-//    }
+    func downloadAndSaveFile(from url: String, fileName: String, completion: @escaping (String?) -> Void) {
+        let storageRef = storage.reference(forURL: url)
+        storageRef.getData(maxSize: 10 * 1024 * 1024 * 1000) { data, error in
+            if let error = error {
+                print("Error downloading file: \(error)")
+                completion(nil)
+            } else {
+                guard let data = data else {
+                    print("Error: no data returned from download task")
+                    completion(nil)
+                    return
+                }
+                let documentsUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+                let destinationUrl = documentsUrl.appendingPathComponent(fileName)
+                do {
+                    try data.write(to: destinationUrl, options: .atomic)
+                    completion(destinationUrl.path)
+                } catch {
+                    print("Error saving file: \(error)")
+                    completion(nil)
+                }
+            }
+        }
+    }
+
+    
+    
 }

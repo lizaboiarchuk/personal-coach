@@ -17,6 +17,7 @@ class WorkoutPreview {
     var author: String
     var video: String
     var name: String
+    var uid: String
     
     var isDownloaded = false
     var localVideoPath: String?
@@ -31,5 +32,6 @@ class WorkoutPreview {
         self.video = workout.video
         self.name = workout.name
         self.coverURL = workout.cover
+        self.uid = workout.uid
     }
 }

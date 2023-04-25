@@ -53,8 +53,8 @@ struct LibraryView: View {
                                     
                                     ForEach(self.viewModel.workouts.indices, id: \.self) { index in
                                         let workout = self.viewModel.workouts[index]
-                                        NavigationLink(destination: WorkoutDetailsView(workout: workout)) {
-                                            LibraryCellView(workout: workout)
+                                        NavigationLink(destination: WorkoutDetailsView(workout: workout, delegate: self.viewModel)) {
+                                            LibraryCellView(workout: workout, delegate: self.viewModel)
                                         }
                                     }
                                 }

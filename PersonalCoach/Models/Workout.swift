@@ -15,4 +15,5 @@ struct Workout: Codable {
     var author: String
     var video: String
     var name: String
+    var uid: String
 }

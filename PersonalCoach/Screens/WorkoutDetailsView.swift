@@ -10,7 +10,9 @@ import SwiftUI
 struct  WorkoutDetailsView: View {
     
     @State private var showCameraView = false
+    
     let workout: WorkoutPreview
+    let delegate: DownloaderDelegate
 
 
     var body: some View {
