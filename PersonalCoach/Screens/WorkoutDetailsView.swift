@@ -99,7 +99,7 @@ struct WorkoutDetailsView: View {
                                         }
                                         .hidden()
                                     } //: HSTACK
-                                    
+
                                     .padding()
                                 } //: HSTACK
                             } //: VSTACK

@@ -83,15 +83,14 @@ struct LibraryView: View {
                 }
             }
             
-            
             Text("Second Tab")
                 .tabItem {
-                    Label("My workouts", systemImage: "bookmark.fill")
+                    Label("Saved workouts", systemImage: "bookmark.fill")
                 }
             
             Text("Profile")
                 .tabItem {
-                    Label("Profile", systemImage: "person.crop.circle.fill")
+                    Label("About", systemImage: "person.crop.circle.fill")
                 }
             
         } //: TABVVIEW

@@ -20,28 +20,34 @@ struct PoseDetectionView: View {
     @State private var counter = 5
     
     var workout: WorkoutPreview
-
+    
     var body: some View {
+        
         ZStack {
-            ZStack {
-                PoseDetectionViewControllerRepresentable(resultLabel: $viewModel.resultLabel, isPaused: $showOverlay, workout: workout)
-                    .aspectRatio(3.0/4.0, contentMode: .fill)
-                    .frame(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height)
-                    .edgesIgnoringSafeArea(.all)
-                    .scaleEffect(x: -1, y: 1)
-
+            NavigationView {
                 ZStack {
-                    VideoStreamerViewControllerRepresentable(workout: workout)
-                        .frame(width: 300, height: 170)
-                        .position(x: UIScreen.main.bounds.width * 0.60, y: UIScreen.main.bounds.height * 0.15)
-                    VStack {
-                        Text(viewModel.resultLabel)
-                            .font(.title)
-                            .foregroundColor(.white)
-                    }
-                    .position(x: UIScreen.main.bounds.width * 0.60, y: UIScreen.main.bounds.height * 0.35)
+                    PoseDetectionViewControllerRepresentable(resultLabel: $viewModel.resultLabel, isPaused: $showOverlay, workout: workout)
+                        .aspectRatio(3.0/4.0, contentMode: .fill)
+                        .frame(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height)
+                        .edgesIgnoringSafeArea(.all)
+                        .scaleEffect(x: -1, y: 1)
+                    
+                    ZStack {
+                        VideoStreamerViewControllerRepresentable(workout: workout)
+                            .frame(width: 300, height: 170)
+                            .position(x: UIScreen.main.bounds.width * 0.60, y: UIScreen.main.bounds.height * 0.15)
+                        VStack {
+                            Text(viewModel.resultLabel)
+                                .font(.title)
+                                .foregroundColor(.white)
+                        }
+                        .position(x: UIScreen.main.bounds.width * 0.60, y: UIScreen.main.bounds.height * 0.35)
+                    }//:ZSTACK
                 }//:ZSTACK
-            } //:ZSTACK
+            } //:NAVIGATIONVIEW
+            .navigationBarBackButtonHidden(true)
+            .toolbar(.hidden, for: .tabBar)
+            
             if showOverlay {
                 Color.gray.opacity(0.8)
                     .edgesIgnoringSafeArea(.all)
@@ -73,11 +79,6 @@ struct PoseDetectionView: View {
     }
 }
 
-//struct PoseDetectionView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        PoseDetectionView()
-//    }
-//}
 
 
 // MARK: - ViewModel
@@ -93,15 +94,16 @@ struct PoseDetectionViewControllerRepresentable: UIViewControllerRepresentable {
     @Binding var resultLabel: String
     @Binding var isPaused: Bool
     var workout: WorkoutPreview
-
+    
     func makeUIViewController(context: Context) -> PoseDetectionViewController {
         let viewController = PoseDetectionViewController()
         viewController.resultLabelBinding = $resultLabel
         viewController.isPaused = isPaused
-        viewController.positionsPath = workout.localPositionsPath        
+        viewController.positionsPath = workout.localPositionsPath
+        
         return viewController
     }
-
+    
     func updateUIViewController(_ uiViewController: PoseDetectionViewController, context: Context) {
         uiViewController.isPaused = isPaused
     }
@@ -178,14 +180,14 @@ final class PoseDetectionViewController: UIViewController {
 }
 
 
-  // MARK: - CameraFeedManagerDelegate Methods
+// MARK: - CameraFeedManagerDelegate Methods
 extension PoseDetectionViewController: CameraFeedManagerDelegate {
     func cameraFeedManager(_ cameraFeedManager: CameraFeedManager, didOutput pixelBuffer: CVPixelBuffer) {
         if !isPaused {
             self.runModel(pixelBuffer)
         }
     }
-
+    
     private func runModel(_ pixelBuffer: CVPixelBuffer) {
         guard !isRunning else { return }
         guard let estimator = poseEstimator else { return }
