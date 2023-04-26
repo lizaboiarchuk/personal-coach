@@ -8,107 +8,61 @@
 import SwiftUI
 
 struct LibraryCellView: View {
-    
-    var workout: WorkoutPreview
-    let delegate: DownloaderDelegate
-    
-    private enum wState {
-        case notDownloaded
-        case downloading
-        case downloaded
-    }
-    
-    @State private var currentState: wState
+    @ObservedObject var viewModel: LibraryCellViewModel
     
     init(workout: WorkoutPreview, delegate: DownloaderDelegate) {
-        self.workout = workout
-        self.delegate = delegate
-        
-        let fileManager = FileManager.default
-        let documentsUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        
-        if fileManager.fileExists(atPath: documentsUrl.appendingPathComponent("\(workout.uid).mp4").path) && fileManager.fileExists(atPath: documentsUrl.appendingPathComponent("\(workout.uid).json").path) {
-            self._currentState = State(initialValue: .downloaded)
-            workout.isDownloaded = true
-            workout.localPositionsPath = documentsUrl.appendingPathComponent("\(workout.uid).json").path
-            workout.localVideoPath = documentsUrl.appendingPathComponent("\(workout.uid).mp4").path
-
-            } else {
-                self._currentState = State(initialValue: .notDownloaded)
-            }
-        }
-    
+        viewModel = LibraryCellViewModel(workout: workout, delegate: delegate)
+    }
     
     var body: some View {
         
         HStack(alignment: .center) {
             
-            CoverImageView(image: workout.coverImage)
-            .frame(width: 60, height: 60) // Adjust the frame size as needed
-        
+            CoverImageView(image: viewModel.workout.coverImage)
+                .frame(width: 60, height: 60)
+            
             VStack(alignment: .leading, spacing: 4) {
-                Text(workout.name)
+                Text(viewModel.workout.name)
                     .font(.headline)
                     .fontWeight(.light)
                     .foregroundColor(.black)
-
-                Text("Author: \(workout.author)")
+                
+                Text("Author: \(viewModel.workout.author)")
                     .font(.subheadline)
                     .foregroundColor(.gray)
             } //: VSTACK
             .padding(.leading)
-
+            
             Spacer()
-
+            
             // MARK: BUTTONS
             HStack(spacing: 10) {
                 
                 ZStack {
-                    if currentState == .downloading {
+                    if viewModel.currentState == .downloading {
                         ProgressView()
                             .progressViewStyle(CircularProgressViewStyle(tint: Color(UIColor.darkGray)))
                     }
                     else {
                         
                         Button(action: {
-                            
-                            self.currentState = .downloading
-                            self.delegate.downloadWorkout(videoStoragePath: self.workout.video,
-                                                          positionsStoragePath: self.workout.positions,
-                                                          videoFileName: "\(workout.uid).mp4",
-                                                          positionsFileName: "\(workout.uid).json") { localVideoPath, localPositionsPath in
-                                if let lvp = localVideoPath, let lpp = localPositionsPath {
-                                    self.workout.localVideoPath = lvp
-                                    self.workout.localPositionsPath = lpp
-                                    print(type(of: lvp))
-                                    self.workout.isDownloaded = true
-                                    self.currentState = .downloaded
-                                } else {
-                                    self.currentState = .notDownloaded
-                                    
-                                }
-                            }
-                            
+                            viewModel.downloadWorkout()
                         }) {
-                            Image(systemName: self.currentState == .downloaded ? "checkmark.circle.fill" : "icloud.and.arrow.down")
+                            Image(systemName: viewModel.currentState == .downloaded ? "checkmark.circle.fill" : "icloud.and.arrow.down")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 25, height: 25)
                                 .tint(Color("ColorDarkGreen"))
                             
                         }
-                        .disabled(self.currentState == .downloaded)
-                        .onChange(of: workout.isDownloaded) { newValue in
-                            if newValue {
-                                
-                            } else {
-                            }
+                        .disabled(viewModel.currentState == .downloaded)
+                        .onChange(of: viewModel.workout.isDownloaded) { newValue in
                         }
                     }
                 }
-
+                
                 Button(action: {
-                    print("Play button tapped")
+                    viewModel.playWorkout()
                 }) {
                     Image(systemName: "play.circle.fill")
                         .resizable()
@@ -124,14 +78,3 @@ struct LibraryCellView: View {
         .cornerRadius(10)
     }
 }
-
-
-//struct LibraryCellView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ZStack {
-//            Color("ColorGrey")
-//                .ignoresSafeArea(.all, edges: .all)
-//            LibraryCellView(title: "Light morning workout", author: "Author")
-//        }
-//    }
-//}
