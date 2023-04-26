@@ -10,6 +10,7 @@ import SwiftUI
 
 class LibraryCellViewModel: ObservableObject {
     @Published var currentState: WorkoutDownloadState = .notDownloaded
+    @Published var navigateToPoseDetection = false
     let workout: WorkoutPreview
     let delegate: DownloaderDelegate
 
@@ -48,8 +49,9 @@ class LibraryCellViewModel: ObservableObject {
         }
     }
 
-    func playWorkout() {
-        print("Play button tapped")
+    
+    func deleteWorkout() {
+        print("delete workout")
     }
 }
 

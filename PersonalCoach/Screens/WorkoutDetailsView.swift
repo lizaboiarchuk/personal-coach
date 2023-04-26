@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ColoredButtonStyle: ButtonStyle {
     let color: Color
-
+    
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .background(color)
@@ -20,11 +20,9 @@ struct ColoredButtonStyle: ButtonStyle {
 
 
 
-struct  WorkoutDetailsView: View {
+struct WorkoutDetailsView: View {
     
-    @State private var showCameraView = false
     @ObservedObject var viewModel: LibraryCellViewModel
-        
     
     init(model: LibraryCellViewModel) {
         viewModel = model
@@ -48,7 +46,26 @@ struct  WorkoutDetailsView: View {
                             VStack {
                                 Spacer()
                                 HStack {
+                                    
+                                    if viewModel.currentState == .downloaded {
+                                        Button(action: {
+                                            viewModel.deleteWorkout()
+                                        }) {
+                                            Image(systemName: "trash.circle")
+                                                .font(.system(size: 44))
+                                                .foregroundColor(Color.white)
+                                        }
+                                        .buttonStyle(ColoredButtonStyle(color: Color("ColorDarkGreen")))
+                                        .padding(.leading) //: DELETE BUTTON
+                                    }
+                                    else {
+                                        EmptyView()
+                                            .frame(width: 44, height: 44)
+                                            .padding(.leading)
+                                    }
+                                    
                                     Spacer()
+                                    
                                     HStack(spacing: 5) {
                                         Button(action: {
                                             viewModel.downloadWorkout()
@@ -60,21 +77,20 @@ struct  WorkoutDetailsView: View {
                                         .buttonStyle(ColoredButtonStyle(color: Color("ColorDarkGreen")))
                                         .disabled(viewModel.currentState == .downloaded)
                                         .onChange(of: viewModel.workout.isDownloaded) { newValue in
-                                            // ...
                                         } //: DOWNLOAD BUTTON
-
+                                        
                                         Button(action: {
-                                            showCameraView = true
+                                            viewModel.navigateToPoseDetection = true
                                         }) {
                                             Image(systemName: "play.circle")
                                                 .font(.system(size: 44))
                                                 .foregroundColor(Color.white)
                                         }
                                         .buttonStyle(ColoredButtonStyle(color: Color("ColorDarkGreen")))
-
-                                        NavigationLink(destination: PoseDetectionView(workout: viewModel.workout), isActive: $showCameraView) {
+                                        //: PLAY BUTTON
+                                        NavigationLink(destination: PoseDetectionView(workout: viewModel.workout), isActive: $viewModel.navigateToPoseDetection) {
                                             EmptyView()
-                                        } //: PLAY BUTTON
+                                        }
                                         .hidden()
                                     } //: HSTACK
                                     .padding()
