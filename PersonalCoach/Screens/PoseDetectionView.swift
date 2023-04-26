@@ -19,20 +19,19 @@ struct PoseDetectionView: View {
     @State private var showOverlay = true
     @State private var counter = 5
     
-    var localPositionsPath: String?
-    var localVideoPath: String?
+    var workout: WorkoutPreview
 
     var body: some View {
         ZStack {
             ZStack {
-                PoseDetectionViewControllerRepresentable(resultLabel: $viewModel.resultLabel, isPaused: $showOverlay, positionsPath: localPositionsPath)
+                PoseDetectionViewControllerRepresentable(resultLabel: $viewModel.resultLabel, isPaused: $showOverlay, workout: workout)
                     .aspectRatio(3.0/4.0, contentMode: .fill)
                     .frame(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height)
                     .edgesIgnoringSafeArea(.all)
                     .scaleEffect(x: -1, y: 1)
 
                 ZStack {
-                    VideoStreamerViewControllerRepresentable(videoPath: localVideoPath)
+                    VideoStreamerViewControllerRepresentable(workout: workout)
                         .frame(width: 300, height: 170)
                         .position(x: UIScreen.main.bounds.width * 0.60, y: UIScreen.main.bounds.height * 0.15)
                     VStack {
@@ -74,11 +73,11 @@ struct PoseDetectionView: View {
     }
 }
 
-struct PoseDetectionView_Previews: PreviewProvider {
-    static var previews: some View {
-        PoseDetectionView()
-    }
-}
+//struct PoseDetectionView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        PoseDetectionView()
+//    }
+//}
 
 
 // MARK: - ViewModel
@@ -93,14 +92,13 @@ struct PoseDetectionViewControllerRepresentable: UIViewControllerRepresentable {
     
     @Binding var resultLabel: String
     @Binding var isPaused: Bool
-    var positionsPath: String?
+    var workout: WorkoutPreview
 
     func makeUIViewController(context: Context) -> PoseDetectionViewController {
         let viewController = PoseDetectionViewController()
         viewController.resultLabelBinding = $resultLabel
         viewController.isPaused = isPaused
-        viewController.positionsPath = positionsPath
-        
+        viewController.positionsPath = workout.localPositionsPath        
         return viewController
     }
 
@@ -213,7 +211,9 @@ extension PoseDetectionViewController: CameraFeedManagerDelegate {
                     }
                     self.overlayView.draw(at: image, keypoints: keypoints, deviated: deviatedLines)
                 }
-            } catch {}
+            } catch {
+                print("sdfgh")
+            }
         }
     }
 }

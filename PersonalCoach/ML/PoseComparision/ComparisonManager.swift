@@ -22,7 +22,6 @@ final class ComparisonManager {
         
         let fileManager = FileManager.default
         if fileManager.fileExists(atPath: path) {
-            
             let url = URL(fileURLWithPath: path)
                 do {
                     let jsonData = try Data(contentsOf: url)
@@ -31,6 +30,7 @@ final class ComparisonManager {
                     let jsonString = String(data: jsonDataEncoded, encoding: .utf8)
                     let myData = try decoder.decode(PrecalculatedPositionsData.self, from: jsonDataEncoded)
                     self.tagretPositions = myData.array
+                    print("LEN: \(self.tagretPositions.count)")
                 } catch {
                     self.tagretPositions = []
                 }

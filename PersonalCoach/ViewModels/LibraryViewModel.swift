@@ -51,41 +51,28 @@ extension LibraryViewModel: DownloaderDelegate {
         var savedPositionsPath: String?
         
         DispatchQueue.global(qos: .background).async {
-            
             let group = DispatchGroup()
-            
             group.enter()
             self.firestoreManager.downloadAndSaveFile(from: videoStoragePath, fileName: videoFileName) { path in
                 if let path = path {
-                    
                     savedVideoPath = path
-                    print("Video saved")
-                    print(savedVideoPath)
                 }
                 group.leave()
             }
-            
             group.enter()
             self.firestoreManager.downloadAndSaveFile(from: positionsStoragePath, fileName: positionsFileName) { path in
                 if let path = path {
                     savedPositionsPath = path
-                    print("Positions saved")
-                    print(savedPositionsPath)
                 }
                 group.leave()
             }
-            
             group.notify(queue: .main) {
                 if let lvp = savedVideoPath, let lpp = savedPositionsPath {
-                    print("Video saved successfully to \(lvp), \(lpp)")
                     completion(lvp, lpp)
                 } else {
-                    print("Video not saved")
                     completion(nil, nil)
                 }
             }
         }
     }
-
-
 }

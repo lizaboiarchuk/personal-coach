@@ -9,7 +9,7 @@ import SwiftUI
 
 struct LibraryCellView: View {
     
-    let workout: WorkoutPreview
+    var workout: WorkoutPreview
     let delegate: DownloaderDelegate
     
     private enum wState {
@@ -29,6 +29,10 @@ struct LibraryCellView: View {
         
         if fileManager.fileExists(atPath: documentsUrl.appendingPathComponent("\(workout.uid).mp4").path) && fileManager.fileExists(atPath: documentsUrl.appendingPathComponent("\(workout.uid).json").path) {
             self._currentState = State(initialValue: .downloaded)
+            workout.isDownloaded = true
+            workout.localPositionsPath = documentsUrl.appendingPathComponent("\(workout.uid).json").path
+            workout.localVideoPath = documentsUrl.appendingPathComponent("\(workout.uid).mp4").path
+
             } else {
                 self._currentState = State(initialValue: .notDownloaded)
             }
@@ -76,6 +80,7 @@ struct LibraryCellView: View {
                                 if let lvp = localVideoPath, let lpp = localPositionsPath {
                                     self.workout.localVideoPath = lvp
                                     self.workout.localPositionsPath = lpp
+                                    print(type(of: lvp))
                                     self.workout.isDownloaded = true
                                     self.currentState = .downloaded
                                 } else {

@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class WorkoutPreview {
+class WorkoutPreview: ObservableObject {
     var description: String
     var tags: [String]
     var coverURL: String
@@ -19,9 +19,9 @@ class WorkoutPreview {
     var name: String
     var uid: String
     
-    var isDownloaded = false
-    var localVideoPath: String?
-    var localPositionsPath: String?
+    @Published var isDownloaded = false
+    @Published var localVideoPath: String?
+    @Published var localPositionsPath: String?
     
     
     init(workout: Workout) {

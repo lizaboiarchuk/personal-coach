@@ -11,7 +11,7 @@ struct  WorkoutDetailsView: View {
     
     @State private var showCameraView = false
     
-    let workout: WorkoutPreview
+    var workout: WorkoutPreview
     let delegate: DownloaderDelegate
 
 
@@ -54,8 +54,7 @@ struct  WorkoutDetailsView: View {
                                                 .background(Color.white)
                                                 .clipShape(Circle())
                                         }
-                                        NavigationLink(destination: PoseDetectionView(localPositionsPath: self.workout.localPositionsPath,
-                                                                                      localVideoPath: self.workout.localVideoPath), isActive: $showCameraView) {
+                                        NavigationLink(destination: PoseDetectionView(workout: workout), isActive: $showCameraView) {
                                             EmptyView()
                                         }
                                         .hidden()
