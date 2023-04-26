@@ -10,8 +10,8 @@ import SwiftUI
 struct LibraryCellView: View {
     @ObservedObject var viewModel: LibraryCellViewModel
     
-    init(workout: WorkoutPreview, delegate: DownloaderDelegate) {
-        viewModel = LibraryCellViewModel(workout: workout, delegate: delegate)
+    init(model: LibraryCellViewModel) {
+        viewModel = model
     }
     
     var body: some View {

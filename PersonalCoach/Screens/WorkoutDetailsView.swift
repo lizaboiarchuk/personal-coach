@@ -7,14 +7,29 @@
 
 import SwiftUI
 
+struct ColoredButtonStyle: ButtonStyle {
+    let color: Color
+
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .background(color)
+            .clipShape(Circle())
+            .opacity(configuration.isPressed ? 0.7 : 1.0)
+    }
+}
+
+
+
 struct  WorkoutDetailsView: View {
     
     @State private var showCameraView = false
+    @ObservedObject var viewModel: LibraryCellViewModel
+        
     
-    var workout: WorkoutPreview
-    let delegate: DownloaderDelegate
-
-
+    init(model: LibraryCellViewModel) {
+        viewModel = model
+    }
+    
     var body: some View {
         
         ZStack {
@@ -26,41 +41,41 @@ struct  WorkoutDetailsView: View {
                 
                 VStack(alignment: .leading, spacing: 10) {
                     
-                    CoverImageView(image: workout.coverImage)
-                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width * 0.9)
-                    .clipped()
-                    .overlay(
+                    CoverImageView(image: viewModel.workout.coverImage)
+                        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width * 0.9)
+                        .clipped()
+                        .overlay(
                             VStack {
                                 Spacer()
                                 HStack {
                                     Spacer()
                                     HStack(spacing: 5) {
                                         Button(action: {
+                                            viewModel.downloadWorkout()
                                         }) {
-                                            Image(systemName: "arrow.down.circle.fill")
+                                            Image(systemName: viewModel.currentState == .downloaded ? "checkmark.circle" : "icloud.and.arrow.down")
                                                 .font(.system(size: 44))
-                                                .background(Color.white)
-                                                .clipShape(Circle())
-                                            
+                                                .foregroundColor(Color.white)
                                         }
+                                        .buttonStyle(ColoredButtonStyle(color: Color("ColorDarkGreen")))
+                                        .disabled(viewModel.currentState == .downloaded)
+                                        .onChange(of: viewModel.workout.isDownloaded) { newValue in
+                                            // ...
+                                        } //: DOWNLOAD BUTTON
+
                                         Button(action: {
-                                            
-                                            
-                                            
                                             showCameraView = true
                                         }) {
-                                            Image(systemName: "play.circle.fill")
+                                            Image(systemName: "play.circle")
                                                 .font(.system(size: 44))
-                                                .background(Color.white)
-                                                .clipShape(Circle())
+                                                .foregroundColor(Color.white)
                                         }
-                                        NavigationLink(destination: PoseDetectionView(workout: workout), isActive: $showCameraView) {
+                                        .buttonStyle(ColoredButtonStyle(color: Color("ColorDarkGreen")))
+
+                                        NavigationLink(destination: PoseDetectionView(workout: viewModel.workout), isActive: $showCameraView) {
                                             EmptyView()
-                                        }
+                                        } //: PLAY BUTTON
                                         .hidden()
-                                        
-                                        
-                                        
                                     } //: HSTACK
                                     .padding()
                                 } //: HSTACK
@@ -69,13 +84,13 @@ struct  WorkoutDetailsView: View {
                     
                     VStack(alignment: .leading, spacing: 5) {
                         
-                        Text(workout.name)
+                        Text(viewModel.workout.name)
                             .font(.title)
                             .fontWeight(.bold)
                             .foregroundColor(Color("ColorDarkGreen"))
                         
                         
-                        Text("Author: \(workout.author)")
+                        Text("Author: \(viewModel.workout.author)")
                             .font(.subheadline)
                             .fontWeight(.light)
                             .foregroundColor(.gray)
@@ -89,7 +104,7 @@ struct  WorkoutDetailsView: View {
                                 .fontWeight(.medium)
                                 .padding(.top)
                                 .foregroundColor(.black)
-                            Text(workout.description)
+                            Text(viewModel.workout.description)
                                 .font(.body)
                                 .fontWeight(.ultraLight)
                                 .padding(.top, 1)
@@ -110,11 +125,3 @@ struct  WorkoutDetailsView: View {
         .tint(Color("ColorDarkGreen"))
     }
 }
-
-//struct WorkoutDetailsView_Previews: PreviewProvider {
-//    static var previews: some View {
-////        WorkoutDetailsView(itemIndex: 1,
-////                           workoutTitle: "Light morning workout",
-////                           workoutAuthor: "Madfit")
-//    }
-//}
