@@ -43,6 +43,46 @@ struct PoseDetectionView: View {
                         }
                         .position(x: UIScreen.main.bounds.width * 0.60, y: UIScreen.main.bounds.height * 0.35)
                     }//:ZSTACK
+                    VStack {
+                        Spacer()
+                        
+                        HStack(spacing: 40) {
+                            Button(action: {
+                                // Action for Pause button
+                            }, label: {
+                                ZStack {
+                                    Circle()
+                                        .foregroundColor(Color("ColorLightGrey").opacity(0.5))
+                                        .frame(width: 75, height: 75)
+                                    
+                                    Image(systemName: "pause")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: 25, height: 25)
+                                        .foregroundColor(.black)
+                                    
+                                }
+                            })
+                            
+                            Button(action: {
+                                // Action for Cancel button
+                            }, label: {
+                                ZStack {
+                                    Circle()
+                                        .foregroundColor(Color("ColorLightGrey").opacity(0.5))
+                                        .frame(width: 75, height: 75)
+                                    
+                                    Image(systemName: "xmark")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: 25, height: 25)
+                                        .foregroundColor(.black)
+                                }
+                            })
+                        }
+                        .padding(.bottom, 50)
+                    } //: PAUSE CANCEL BUTTONS
+                    .alignmentGuide(.bottom) { _ in UIScreen.main.bounds.height * 0.5 }
                 }//:ZSTACK
             } //:NAVIGATIONVIEW
             .navigationBarBackButtonHidden(true)
