@@ -67,18 +67,24 @@ struct WorkoutDetailsView: View {
                                     Spacer()
                                     
                                     HStack(spacing: 5) {
-                                        Button(action: {
-                                            viewModel.downloadWorkout()
-                                        }) {
-                                            Image(systemName: viewModel.currentState == .downloaded ? "checkmark.circle" : "icloud.and.arrow.down")
-                                                .font(.system(size: 44))
-                                                .foregroundColor(Color.white)
+                                        VStack {
+                                            if viewModel.currentState == .downloading {
+                                                ProgressView()
+                                                    .progressViewStyle(CircularProgressViewStyle())
+                                                    .foregroundColor(.white)
+                                            }
+                                            Button(action: {
+                                                viewModel.downloadWorkout()
+                                            }) {
+                                                Image(systemName: viewModel.currentState == .downloaded ? "checkmark.circle" : "arrow.down.circle")
+                                                    .font(.system(size: 44))
+                                                    .foregroundColor(Color.white)
+                                            }
+                                            .buttonStyle(ColoredButtonStyle(color: Color("ColorDarkGreen")))
+                                            .disabled(viewModel.currentState == .downloaded || viewModel.currentState == .downloading)
+                                            .onChange(of: viewModel.workout.isDownloaded) { newValue in
+                                            } //: DOWNLOAD BUTTON
                                         }
-                                        .buttonStyle(ColoredButtonStyle(color: Color("ColorDarkGreen")))
-                                        .disabled(viewModel.currentState == .downloaded)
-                                        .onChange(of: viewModel.workout.isDownloaded) { newValue in
-                                        } //: DOWNLOAD BUTTON
-                                        
                                         Button(action: {
                                             viewModel.navigateToPoseDetection = true
                                         }) {
@@ -93,6 +99,7 @@ struct WorkoutDetailsView: View {
                                         }
                                         .hidden()
                                     } //: HSTACK
+                                    
                                     .padding()
                                 } //: HSTACK
                             } //: VSTACK

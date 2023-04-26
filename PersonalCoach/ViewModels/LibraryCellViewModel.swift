@@ -51,7 +51,23 @@ class LibraryCellViewModel: ObservableObject {
 
     
     func deleteWorkout() {
-        print("delete workout")
+        let fileManager = FileManager.default
+        if let videoPath = workout.localVideoPath, let positionsPath = workout.localPositionsPath {
+            do {
+                if fileManager.fileExists(atPath: videoPath) {
+                    try fileManager.removeItem(atPath: videoPath)
+                }
+                if fileManager.fileExists(atPath: positionsPath) {
+                    try fileManager.removeItem(atPath: positionsPath)
+                }
+                workout.isDownloaded = false
+                workout.localVideoPath = nil
+                workout.localPositionsPath = nil
+                currentState = .notDownloaded
+            } catch {
+                print("Error deleting files: \(error)")
+            }
+        }
     }
 }
 
