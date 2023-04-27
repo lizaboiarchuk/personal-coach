@@ -110,16 +110,15 @@ class PoseDetectionViewModel: ObservableObject {
                 let (evalScore, evalFinished) = comparer.receive(positions: positionsArray)
                 var deviatedLines = comparer.getDeviatedLines()
                 DispatchQueue.main.async { [self] in
-                    var newLabel = "... \(evalScore)"
+                    var newLabel = ""
                     if evalFinished {
-                        newLabel = evalScore < self.evalTreshold ? "Good" : "Bad! \(evalScore)"
                         if evalScore < self.evalTreshold {
                             deviatedLines = []
                             correctFramesCount += 1
                         }
                         framesCount += 1
+                        resultLabel = "\(Int(round(Double(correctFramesCount) / Double(framesCount) * 100)))%"
                     }
-                    resultLabel = newLabel
                     let image = UIImage(ciImage: CIImage(cvPixelBuffer: pixelBuffer))
                     if score < self.overlayTreshold {
                         overlayView.image = image

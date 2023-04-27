@@ -87,19 +87,22 @@ struct PoseDetectionView: View {
                     ZStack {
                         VideoPlayerView(viewModel: streamerViewModel)
                             .frame(width: 300, height: 170)
-                            .position(x: UIScreen.main.bounds.width * 0.60, y: UIScreen.main.bounds.height * 0.10)
+                            .position(x: UIScreen.main.bounds.width * 0.60, y: UIScreen.main.bounds.height * 0.15)
                             .onAppear {
                                 streamerViewModel.startVideo()
                             }
                         
                         Circle()
-                            .fill(Color.gray.opacity(0.5))
-                            .frame(width: 50, height: 50)
+                            .fill(Color.gray.opacity(0.7))
+                            .frame(width: 70, height: 70)
                             .overlay(
-                                Text("Text")
-                                    .foregroundColor(.black)
+                                Text("Score: \n \(detectionViewModel.resultLabel)")
+                                    .font(.title3)
+                                    .foregroundColor(.white)
+                                    .fontWeight(.heavy)
+                                    .multilineTextAlignment(.center)
                             )
-                            .offset(x: 25, y: UIScreen.main.bounds.height/2 - 25)
+                            .position(x: UIScreen.main.bounds.width * 0.1, y: UIScreen.main.bounds.height * 0.15)
                         
                         VStack {
                             if isLabelVisible {
@@ -132,7 +135,7 @@ struct PoseDetectionView: View {
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
                                         .frame(width: 25, height: 25)
-                                        .foregroundColor(.black)
+                                        .foregroundColor(.white)
                                 }
                             })
                         }
