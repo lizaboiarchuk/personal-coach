@@ -35,9 +35,32 @@ struct PoseDetectionView: View {
     @State private var counter = 5
     @State private var showAlert = false
     @State private var shouldDismiss = false
-    
+    @State private var currentLabel = ""
+    @State private var isLabelVisible = false
+
     private var onDismiss: (() -> Void)?
     private var workout: WorkoutPreview
+    
+    
+    func randomizeLabelVisibility() {
+        let randomShowInterval = Double.random(in: 0.3...3.0) // Adjust the range as needed
+        let randomHideInterval = Double.random(in: 0.5...2.5) // Adjust the range as needed
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + randomShowInterval) {
+            withAnimation {
+                currentLabel = MotivationalPhrases.phrases.randomElement() ?? "Keep going!"
+                isLabelVisible = true
+            }
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + randomHideInterval) {
+                withAnimation {
+                    isLabelVisible = false
+                }
+                randomizeLabelVisibility()
+            }
+        }
+    }
+
     
     init(workout: WorkoutPreview, onDismiss: (() -> Void)?) {
         print("init pose detection")
@@ -45,6 +68,7 @@ struct PoseDetectionView: View {
         self.streamerViewModel = VideoStreamerViewModel(videoPath: workout.localVideoPath)
         self.onDismiss = onDismiss
         self.workout = workout
+        randomizeLabelVisibility()
     }
     
     var body: some View {
@@ -60,7 +84,6 @@ struct PoseDetectionView: View {
                         .edgesIgnoringSafeArea(.all)
                         .scaleEffect(x: -1, y: 1)
                     
-                    
                     ZStack {
                         VideoPlayerView(viewModel: streamerViewModel)
                             .frame(width: 300, height: 170)
@@ -69,12 +92,26 @@ struct PoseDetectionView: View {
                                 streamerViewModel.startVideo()
                             }
                         
+                        Circle()
+                            .fill(Color.gray.opacity(0.5))
+                            .frame(width: 50, height: 50)
+                            .overlay(
+                                Text("Text")
+                                    .foregroundColor(.black)
+                            )
+                            .offset(x: 25, y: UIScreen.main.bounds.height/2 - 25)
+                        
                         VStack {
-                            Text(detectionViewModel.resultLabel)
-                                .font(.title)
-                                .foregroundColor(.white)
+                            if isLabelVisible {
+                                Text(currentLabel)
+                                    .font(.title)
+                                    .foregroundColor(.white)
+                            }
                         }
                         .position(x: UIScreen.main.bounds.width * 0.60, y: UIScreen.main.bounds.height * 0.35)
+                        .onAppear {
+                            randomizeLabelVisibility()
+                        }
                     }
                     
                     VStack {

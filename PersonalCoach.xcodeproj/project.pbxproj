@@ -43,6 +43,7 @@
 		2594416629F860A600A8BF8E /* LibraryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2594416529F860A600A8BF8E /* LibraryViewModel.swift */; };
 		2594416829F866DF00A8BF8E /* DownloaderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2594416729F866DF00A8BF8E /* DownloaderDelegate.swift */; };
 		25A6122629FB1B8200634359 /* LazyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A6122529FB1B8200634359 /* LazyView.swift */; };
+		25A6122929FB1F3700634359 /* MotivationalPhrases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A6122829FB1F3700634359 /* MotivationalPhrases.swift */; };
 		25BB957429D36F3400CA1AEB /* LibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BB957329D36F3400CA1AEB /* LibraryView.swift */; };
 		25BB957629D3703700CA1AEB /* LibraryCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BB957529D3703700CA1AEB /* LibraryCellView.swift */; };
 		25D335A529E3196D00D1B004 /* PoseDetectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D335A429E3196D00D1B004 /* PoseDetectionView.swift */; };
@@ -107,6 +108,7 @@
 		2594416529F860A600A8BF8E /* LibraryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryViewModel.swift; sourceTree = "<group>"; };
 		2594416729F866DF00A8BF8E /* DownloaderDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloaderDelegate.swift; sourceTree = "<group>"; };
 		25A6122529FB1B8200634359 /* LazyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyView.swift; sourceTree = "<group>"; };
+		25A6122829FB1F3700634359 /* MotivationalPhrases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotivationalPhrases.swift; sourceTree = "<group>"; };
 		25BB957329D36F3400CA1AEB /* LibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryView.swift; sourceTree = "<group>"; };
 		25BB957529D3703700CA1AEB /* LibraryCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryCellView.swift; sourceTree = "<group>"; };
 		25D335A429E3196D00D1B004 /* PoseDetectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoseDetectionView.swift; sourceTree = "<group>"; };
@@ -193,6 +195,14 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
+		25A6122729FB1F1900634359 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				25A6122829FB1F3700634359 /* MotivationalPhrases.swift */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		25D335B029E31A5000D1B004 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -261,6 +271,7 @@
 		25D9AD3429D3269E00821C3F /* PersonalCoach */ = {
 			isa = PBXGroup;
 			children = (
+				25A6122729FB1F1900634359 /* Resources */,
 				2594415329F82E3700A8BF8E /* GoogleService-Info.plist */,
 				2594414A29F81B5300A8BF8E /* DB */,
 				25D335B529E31F6200D1B004 /* ML */,
@@ -476,6 +487,7 @@
 				25A6122629FB1B8200634359 /* LazyView.swift in Sources */,
 				25E93E1229F9B442004273E6 /* LibraryCellViewModel.swift in Sources */,
 				25D9AD3829D3269E00821C3F /* ContentView.swift in Sources */,
+				25A6122929FB1F3700634359 /* MotivationalPhrases.swift in Sources */,
 				25D335BC29E3239C00D1B004 /* ComparisonManager.swift in Sources */,
 				2594415B29F8491000A8BF8E /* WorkoutPreview.swift in Sources */,
 				25D335A529E3196D00D1B004 /* PoseDetectionView.swift in Sources */,
