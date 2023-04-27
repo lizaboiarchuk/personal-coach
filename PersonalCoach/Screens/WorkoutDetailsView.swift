@@ -94,7 +94,9 @@ struct WorkoutDetailsView: View {
                                         }
                                         .buttonStyle(ColoredButtonStyle(color: Color("ColorDarkGreen")))
                                         //: PLAY BUTTON
-                                        NavigationLink(destination: PoseDetectionView(workout: viewModel.workout), isActive: $viewModel.navigateToPoseDetection) {
+                                        NavigationLink(destination: PoseDetectionView(workout: viewModel.workout, onDismiss: {
+                                            viewModel.navigateToPoseDetection = false
+                                        }), isActive: $viewModel.navigateToPoseDetection) {
                                             EmptyView()
                                         }
                                         .hidden()

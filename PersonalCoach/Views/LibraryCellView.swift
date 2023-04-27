@@ -69,7 +69,11 @@ struct LibraryCellView: View {
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 25, height: 25)
                         .tint(Color("ColorDarkGreen"))
-                    NavigationLink(destination: PoseDetectionView(workout: viewModel.workout), isActive: $viewModel.navigateToPoseDetection) {
+                    
+                    
+                    NavigationLink(destination: PoseDetectionView(workout: viewModel.workout, onDismiss: {
+                        viewModel.navigateToPoseDetection = false
+                    }), isActive: $viewModel.navigateToPoseDetection) {
                         EmptyView()
                     }
                     .hidden()

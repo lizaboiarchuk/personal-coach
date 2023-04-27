@@ -27,6 +27,7 @@ struct OverlayViewWrapper: UIViewRepresentable {
 
 
 struct PoseDetectionView: View {
+    
     @ObservedObject var detectionViewModel: PoseDetectionViewModel
     @ObservedObject var streamerViewModel: VideoStreamerViewModel
     
@@ -34,11 +35,14 @@ struct PoseDetectionView: View {
     @State private var counter = 5
     @State private var showAlert = false
     @State private var shouldDismiss = false
+    
+    private var onDismiss: (() -> Void)?
     private var workout: WorkoutPreview
     
-    init(workout: WorkoutPreview) {
+    init(workout: WorkoutPreview, onDismiss: (() -> Void)?) {
         self.detectionViewModel = PoseDetectionViewModel(workout: workout)
         self.streamerViewModel = VideoStreamerViewModel(videoPath: workout.localVideoPath)
+        self.onDismiss = onDismiss
         self.workout = workout
     }
     
@@ -57,13 +61,12 @@ struct PoseDetectionView: View {
                     
                     
                     ZStack {
-//                        VideoStreamerViewControllerRepresentable(workout: workout, shouldDismiss: $shouldDismiss)
                         VideoPlayerView(viewModel: streamerViewModel)
                             .frame(width: 300, height: 170)
                             .position(x: UIScreen.main.bounds.width * 0.60, y: UIScreen.main.bounds.height * 0.10)
                             .onAppear {
-                                    streamerViewModel.startVideo()
-                                }
+                                streamerViewModel.startVideo()
+                            }
                         
                         VStack {
                             Text(detectionViewModel.resultLabel)
@@ -76,10 +79,11 @@ struct PoseDetectionView: View {
                     VStack {
                         Spacer()
                         
-                        HStack(spacing: 40) {                            
+                        HStack(spacing: 40) {
                             Button(action: {
                                 showAlert = true
                                 detectionViewModel.isPaused = true
+                                streamerViewModel.stopStreaming()
                             }, label: {
                                 ZStack {
                                     Circle()
@@ -115,14 +119,28 @@ struct PoseDetectionView: View {
             }
         }
         .alert(isPresented: $showAlert, content: {
-                    Alert(title: Text("Quit Workout"), message: Text("Are you sure you want to quit?"), primaryButton: .cancel(Text("No")), secondaryButton: .destructive(Text("Yes")) {
-                        detectionViewModel.quit()
-                        shouldDismiss = true
-                        UIApplication.shared.windows.first?.rootViewController?.dismiss(animated: true, completion: nil)
-                    })
-                })
+            Alert(title: Text("Quit Workout"), message: Text("Are you sure you want to quit?"), primaryButton: .cancel(Text("No")) {
+                showAlert = false
+                detectionViewModel.isPaused = false
+                streamerViewModel.resumeStreaming()
+                
+            }, secondaryButton: .destructive(Text("Yes")) {
+                detectionViewModel.quit()
+                streamerViewModel.quit()
+                shouldDismiss = true
+                onDismiss?()
+                
+            })
+        })
         .onAppear {
             detectionViewModel.startCountdown()
         }
+//        .onDisappear {
+//            print("disapperingggg")
+//            detectionViewModel.quit()
+//            streamerViewModel.quit()
+//
+//        }
+        
     }
 }

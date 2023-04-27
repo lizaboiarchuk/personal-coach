@@ -34,9 +34,20 @@ class VideoStreamerViewModel: ObservableObject {
     
     func stopStreaming() {
         videoFeedManager.avPlayer.pause()
+        do {
+            try AVAudioSession.sharedInstance().setActive(false)
+        } catch {
+            print("Failed to deactivate audio session: \(error)")
+        }
     }
     
     func resumeStreaming() {
+        do {
+            try AVAudioSession.sharedInstance().setCategory(.playback)
+            try AVAudioSession.sharedInstance().setActive(true)
+        } catch {
+            print("Failed to activate audio session: \(error)")
+        }
         videoFeedManager.avPlayer.play()
     }
     
@@ -51,6 +62,22 @@ class VideoStreamerViewModel: ObservableObject {
         videoFeedManager = VideoFeedManager(url: videoURL)
         playerLayer = AVPlayerLayer(player: videoFeedManager.avPlayer)
         playerLayer.videoGravity = .resizeAspectFill
+    }
+    
+    func quit() {
+        stopStreaming()
+        NotificationCenter.default.removeObserver(self)
+        playerLayer.removeFromSuperlayer()
+        videoFeedManager.avPlayer.replaceCurrentItem(with: nil)
+        
+        // Stop the audio session
+        do {
+            try AVAudioSession.sharedInstance().setActive(false)
+        } catch {
+            print("Failed to deactivate audio session: \(error)")
+        }
+        
+        videoFeedManager = nil
     }
 }
 
