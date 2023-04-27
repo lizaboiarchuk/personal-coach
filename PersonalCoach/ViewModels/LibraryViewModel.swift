@@ -57,12 +57,19 @@ extension LibraryViewModel: DownloaderDelegate {
                 if let path = path {
                     savedVideoPath = path
                 }
+                else {
+                    print("Error downloading and saving workout video")
+
+                }
                 group.leave()
             }
             group.enter()
             self.firestoreManager.downloadAndSaveFile(from: positionsStoragePath, fileName: positionsFileName) { path in
                 if let path = path {
                     savedPositionsPath = path
+                }
+                else {
+                    print("Error downloading and saving workout positions data")
                 }
                 group.leave()
             }

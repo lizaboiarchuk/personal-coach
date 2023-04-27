@@ -11,83 +11,40 @@ import Accelerate.vImage
 import UIKit
 import os
 
+// MARK: - View
+import SwiftUI
+import AVFoundation
 
-// MARK: - ViewControllerRepresentable
-struct VideoStreamerViewControllerRepresentable: UIViewControllerRepresentable {
+// MARK: - View
+struct VideoPlayerView: View {
+    @ObservedObject var viewModel: VideoStreamerViewModel
     
-    typealias UIViewControllerType = VideoStreamerViewController
-    
-    var workout: WorkoutPreview
-    
-    func makeUIViewController(context: Context) -> VideoStreamerViewController {
-        let viewController = VideoStreamerViewController()
-        viewController.videoPath = workout.localVideoPath
-        return viewController
-    }
-    
-    func updateUIViewController(_ uiViewController: VideoStreamerViewController, context: Context) {
-    }
-}
-
-// MARK: - ViewController
-final class VideoStreamerViewController: UIViewController {
-    
-    private var videoFeedManager: VideoFeedManager!
-    private var playerLayer: AVPlayerLayer!
-    var videoPath: String?
-    
-    // MARK: View Handling Methods
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        configVideoCapture()
-        NotificationCenter.default.addObserver(self, selector: #selector(playerDidFinishPlaying), name: .AVPlayerItemDidPlayToEndTime, object: videoFeedManager.avPlayer.currentItem)
-    }
-    
-    @objc private func playerDidFinishPlaying(notification: Notification) {
-        videoFeedManager.avPlayer.seek(to: .zero)
-        videoFeedManager.avPlayer.play()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-            self.videoFeedManager.startVideo()
+    var body: some View {
+        GeometryReader { geometry in
+            VideoPlayerUIView(viewModel: viewModel, frame: geometry.frame(in: .local))
         }
     }
+}
+
+struct VideoPlayerUIView: UIViewRepresentable {
+    @ObservedObject var viewModel: VideoStreamerViewModel
+    var frame: CGRect
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        videoFeedManager.stopVideo()
+    func makeUIView(context: Context) -> UIView {
+        let view = UIView()
+        view.layer.addSublayer(viewModel.playerLayer)
+        viewModel.playerLayer.frame = frame
+        return view
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        playerLayer.frame = view.layer.bounds
-    }
-    
-    private func configVideoCapture() {
-        guard let vp = self.videoPath else { fatalError("Failed to find downloaded video file.") }
-        let fileManager = FileManager.default
-        if !fileManager.fileExists(atPath: vp)  {
-            fatalError("Failed to find downloaded video file.")
-        }
-        let videoURL = URL(fileURLWithPath: vp)
-        
-        videoFeedManager = VideoFeedManager(url: videoURL)
-        videoFeedManager.delegate = self
-        
-        playerLayer = AVPlayerLayer(player: videoFeedManager.avPlayer)
-        playerLayer.videoGravity = .resizeAspectFill
-        view.layer.addSublayer(playerLayer)
+    func updateUIView(_ uiView: UIView, context: Context) {
+        viewModel.playerLayer.frame = frame
     }
 }
 
-// MARK: - VideoFeedManagerDelegate Methods
-extension VideoStreamerViewController: VideoFeedManagerDelegate {
-    func videoFeedManager(_ videoFeedManager: VideoFeedManager, didOutput pixelBuffer: CVPixelBuffer) {}
+// MARK: - Preview
+struct VideoPlayerView_Previews: PreviewProvider {
+    static var previews: some View {
+        VideoPlayerView(viewModel: VideoStreamerViewModel(videoPath: "path/to/video"))
+    }
 }
-
