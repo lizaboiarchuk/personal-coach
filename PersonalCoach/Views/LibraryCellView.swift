@@ -69,15 +69,14 @@ struct LibraryCellView: View {
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 25, height: 25)
                         .tint(Color("ColorDarkGreen"))
-                    
-                    
-                    NavigationLink(destination: PoseDetectionView(workout: viewModel.workout, onDismiss: {
+                }
+                .background(
+                    NavigationLink(destination: LazyView(PoseDetectionView(workout: viewModel.workout, onDismiss: {
                         viewModel.navigateToPoseDetection = false
-                    }), isActive: $viewModel.navigateToPoseDetection) {
+                    })), isActive: $viewModel.navigateToPoseDetection) {
                         EmptyView()
                     }
-                    .hidden()
-                }
+                )
             } //: HSTACK
         }
         .padding(.vertical)

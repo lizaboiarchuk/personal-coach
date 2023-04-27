@@ -12,7 +12,12 @@ class LibraryViewModel: ObservableObject {
     
     let firestoreManager = FirestoreManager()
     @Published var downloadingPreviews = true
-    var workouts: [WorkoutPreview] = []
+
+    var workoutModels: [LibraryCellViewModel] = []
+    
+    var downloadedWorkoutModels: [LibraryCellViewModel] {
+        return workoutModels.filter { $0.workout.isDownloaded }
+    }
     
     
     func loadWorkoutPreviews() {
@@ -36,7 +41,8 @@ class LibraryViewModel: ObservableObject {
                         }
                     }
                 }
-                self.workouts.append(workoutPreview)
+                let workoutModel = LibraryCellViewModel(workout: workoutPreview, delegate: self)
+                self.workoutModels.append(workoutModel)
             }
         }
     }

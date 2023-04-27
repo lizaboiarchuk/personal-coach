@@ -27,6 +27,9 @@ class PoseDetectionViewModel: ObservableObject {
     private var comparer: ComparisonManager?
     private var overlayTreshold: Float = 0.2
     private var evalTreshold: Float = 1.3
+    private var overallScore: Float = 0
+    private var framesCount: Int = 0
+    private var correctFramesCount: Int = 0
     
     private var positionsPath: String?
 
@@ -109,8 +112,12 @@ class PoseDetectionViewModel: ObservableObject {
                 DispatchQueue.main.async { [self] in
                     var newLabel = "... \(evalScore)"
                     if evalFinished {
-                        newLabel = evalScore < self.evalTreshold ? "Good! \(evalScore)" : "Bad! \(evalScore)"
-                        if evalScore < self.evalTreshold { deviatedLines = [] }
+                        newLabel = evalScore < self.evalTreshold ? "Good" : "Bad! \(evalScore)"
+                        if evalScore < self.evalTreshold {
+                            deviatedLines = []
+                            correctFramesCount += 1
+                        }
+                        framesCount += 1
                     }
                     resultLabel = newLabel
                     let image = UIImage(ciImage: CIImage(cvPixelBuffer: pixelBuffer))

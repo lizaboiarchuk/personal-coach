@@ -40,6 +40,7 @@ struct PoseDetectionView: View {
     private var workout: WorkoutPreview
     
     init(workout: WorkoutPreview, onDismiss: (() -> Void)?) {
+        print("init pose detection")
         self.detectionViewModel = PoseDetectionViewModel(workout: workout)
         self.streamerViewModel = VideoStreamerViewModel(videoPath: workout.localVideoPath)
         self.onDismiss = onDismiss

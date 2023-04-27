@@ -93,13 +93,13 @@ struct WorkoutDetailsView: View {
                                                 .foregroundColor(Color.white)
                                         }
                                         .buttonStyle(ColoredButtonStyle(color: Color("ColorDarkGreen")))
-                                        //: PLAY BUTTON
-                                        NavigationLink(destination: PoseDetectionView(workout: viewModel.workout, onDismiss: {
-                                            viewModel.navigateToPoseDetection = false
-                                        }), isActive: $viewModel.navigateToPoseDetection) {
-                                            EmptyView()
-                                        }
-                                        .hidden()
+                                        .background(
+                                            NavigationLink(destination: LazyView(PoseDetectionView(workout: viewModel.workout, onDismiss: {
+                                                viewModel.navigateToPoseDetection = false
+                                            })), isActive: $viewModel.navigateToPoseDetection) {
+                                                EmptyView()
+                                            }
+                                        )
                                     } //: HSTACK
 
                                     .padding()
