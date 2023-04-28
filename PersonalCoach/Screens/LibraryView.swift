@@ -18,6 +18,18 @@ struct LibraryView: View {
     @State private var isFirstAppearance = true
     @State private var selectedTab = 1
     
+    init() {
+        let appearance = UITabBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = UIColor(Color("ColorGrey"))
+        UITabBar.appearance().standardAppearance = appearance
+        
+        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
+        UINavigationBar.appearance().shadowImage = UIImage()
+        UINavigationBar.appearance().isTranslucent = true
+    }
+    
+    
     private func contentView(forTab tab: Int) -> some View {
         VStack {
             // Name at the top

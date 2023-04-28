@@ -147,6 +147,9 @@ struct WorkoutDetailsView: View {
                 
             } //: SCROLLVIEW
             .edgesIgnoringSafeArea(.top)
+            .background(Color("ColorGrey")) // Set the background color explicitly
+            .navigationBarTitleDisplayMode(.inline)
+//            .navigationBarHidden(true)
             
         } //: ZTACK
         .tint(Color("ColorDarkGreen"))    }
