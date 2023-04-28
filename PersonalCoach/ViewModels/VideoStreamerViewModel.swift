@@ -27,7 +27,7 @@ class VideoStreamerViewModel: ObservableObject {
     }
     
     func startVideo() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 6) {
             self.videoFeedManager.startVideo()
         }
     }

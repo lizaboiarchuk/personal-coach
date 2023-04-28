@@ -19,6 +19,9 @@ struct ContentView: View {
                 HomeView()
             }
         }
+        .onAppear {
+            isOnboardingViewActive = true
+        }
     }
 }
 

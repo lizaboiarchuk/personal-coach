@@ -9,7 +9,7 @@ import SwiftUI
 
 struct WorkoutResultsView: View {
     
-    var finalScore: String
+    let finalScore: String
     var onDismiss: (() -> Void)?
     
     @Environment(\.presentationMode) var presentationMode
