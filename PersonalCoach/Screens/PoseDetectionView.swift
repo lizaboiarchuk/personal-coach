@@ -38,6 +38,7 @@ struct PoseDetectionView: View {
     @State private var currentLabel = ""
     @State private var isLabelVisible = false
     @State private var showTabBar = false
+    @State private var goToResults = false
     
     private var onDismiss: (() -> Void)?
     private var workout: WorkoutPreview
@@ -90,6 +91,9 @@ struct PoseDetectionView: View {
                             .position(x: UIScreen.main.bounds.width * 0.60, y: UIScreen.main.bounds.height * 0.15)
                             .onAppear {
                                 streamerViewModel.startVideo()
+                            }
+                            .onReceive(NotificationCenter.default.publisher(for: .AVPlayerItemDidPlayToEndTime)) { _ in
+                                goToResults = true
                             }
                         
                         Circle()
@@ -147,7 +151,13 @@ struct PoseDetectionView: View {
             } //:NAVIGATIONVIEW
             .toolbar(showTabBar ? .visible : .hidden, for: .tabBar)
             .navigationBarBackButtonHidden(true)
-
+            .background(
+                    NavigationLink(
+                        destination: WorkoutResultsView(finalScore: detectionViewModel.resultLabel, onDismiss: onDismiss),
+                        isActive: $goToResults,
+                        label: { EmptyView() }
+                    )
+                )
             if detectionViewModel.showOverlay {
                 Color.gray.opacity(0.8)
                     .edgesIgnoringSafeArea(.all)

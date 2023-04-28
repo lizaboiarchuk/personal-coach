@@ -81,8 +81,9 @@ struct LibraryView: View {
                     
                     if viewModel.downloadingPreviews {
                         ProgressView()
-                            .progressViewStyle(CircularProgressViewStyle(tint: Color.blue))
+                            .progressViewStyle(CircularProgressViewStyle(tint: Color("ColorDarkGreen")))
                             .padding()
+                            
                     }
                     else {
                         contentView(forTab: 1)
@@ -119,7 +120,7 @@ struct LibraryView: View {
                 Text("Profile")
             }
             .tabItem {
-                Label("About", systemImage: "person.crop.circle.fill")
+                Label("About", systemImage: "questionmark.circle.fill")
             }
             .tag(3) // Set
         } //: TABVVIEW
