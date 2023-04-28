@@ -14,7 +14,7 @@ import SwiftUI
 struct AboutView: View {
     
     @State private var isAnimating = false
-    var title = "How it works?🏃🏻‍♀️"
+    var title = "How it works?✌🏻"
     var text = """
         Our personal coach app is designed to help you improve your fitness and exercise routines with the help of cutting-edge technology. Using pose detection and statistical AI algorithms, our app tracks your movements during workouts and compares them to a pre-recorded video of your coach.
 

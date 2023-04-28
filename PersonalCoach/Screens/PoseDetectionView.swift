@@ -41,6 +41,7 @@ struct PoseDetectionView: View {
     @State private var isLabelVisible = false
     @State private var showTabBar = false
     @State private var goToResults = false
+    @State private var overlayAnimating = false
     
     private var onDismiss: (() -> Void)?
     private var workout: WorkoutPreview
@@ -172,13 +173,38 @@ struct PoseDetectionView: View {
                     )
                 )
             if detectionViewModel.showOverlay {
-                Color.gray.opacity(0.8)
+                Color("ColorGrey").opacity(1)
                     .edgesIgnoringSafeArea(.all)
                     .overlay(
-                        Text("\(detectionViewModel.counter)")
-                            .font(.largeTitle)
-                            .fontWeight(.bold)
-                            .foregroundColor(.white)
+                        
+                        VStack {
+                            
+                            Spacer()
+                            Text("Get ready💪🏻\n\nYour workout starts in")
+                                .font(.title)
+                                .fontWeight(.ultraLight)
+                                .foregroundColor(.black)
+                                .multilineTextAlignment(.center)
+                            
+                            Text("\(detectionViewModel.counter)")
+                                .font(.largeTitle)
+                                .fontWeight(.bold)
+                                .foregroundColor(.black)
+                            
+                            Spacer()
+                            
+                            Image("character-3")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(height: 400)
+                                .opacity(overlayAnimating ? 0 : 1)
+                                .onAppear() {
+                                    withAnimation(Animation.easeInOut(duration: 5).repeatForever(autoreverses: true)) {
+                                        overlayAnimating = true
+                                    }
+                                }
+                            
+                        }
                     )
             }
         }
