@@ -12,10 +12,13 @@ struct WorkoutResultsView: View {
     var finalScore: String
     var onDismiss: (() -> Void)?
     
+    @Environment(\.presentationMode) var presentationMode
+    
     
     @State private var textAnimating = false
     @State private var imageAnimating = false
     @State private var showTabBar = false
+    
     
     
     var body: some View {

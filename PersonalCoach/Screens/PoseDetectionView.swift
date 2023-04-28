@@ -27,6 +27,8 @@ struct OverlayViewWrapper: UIViewRepresentable {
 
 
 struct PoseDetectionView: View {
+    
+    @Environment(\.presentationMode) var presentationMode
         
     @ObservedObject var detectionViewModel: PoseDetectionViewModel
     @ObservedObject var streamerViewModel: VideoStreamerViewModel
@@ -70,6 +72,14 @@ struct PoseDetectionView: View {
         self.onDismiss = onDismiss
         self.workout = workout
         randomizeLabelVisibility()
+    }
+    
+    func dismiss() {
+        detectionViewModel.quit()
+        streamerViewModel.quit()
+        shouldDismiss = true
+        showTabBar = true
+        onDismiss?()
     }
     
     var body: some View {
@@ -153,7 +163,10 @@ struct PoseDetectionView: View {
             .navigationBarBackButtonHidden(true)
             .background(
                     NavigationLink(
-                        destination: WorkoutResultsView(finalScore: detectionViewModel.resultLabel, onDismiss: onDismiss),
+                        destination: WorkoutResultsView(finalScore: detectionViewModel.resultLabel, onDismiss: {
+                            goToResults = false
+                            dismiss()
+                        }),
                         isActive: $goToResults,
                         label: { EmptyView() }
                     )
@@ -176,12 +189,7 @@ struct PoseDetectionView: View {
                 streamerViewModel.resumeStreaming()
                 
             }, secondaryButton: .destructive(Text("Yes")) {
-                detectionViewModel.quit()
-                streamerViewModel.quit()
-                shouldDismiss = true
-                showTabBar = true
-                onDismiss?()
-                
+                dismiss()
             })
         })
         .onAppear {
