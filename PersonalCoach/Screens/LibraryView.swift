@@ -117,7 +117,7 @@ struct LibraryView: View {
             .tag(2) // Set the tag for the Saved Workouts tab
             
             NavigationView {
-                Text("Profile")
+                AboutView()
             }
             .tabItem {
                 Label("About", systemImage: "questionmark.circle.fill")
