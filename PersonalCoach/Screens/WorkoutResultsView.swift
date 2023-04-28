@@ -32,6 +32,10 @@ struct WorkoutResultsView: View {
                     Spacer()
                     VStack {
                         Text("Great Job! You rocked that✌🏻🚀\n")
+                            .font(.title3)
+                            .fontWeight(.light)
+                            .foregroundColor(.black)
+                            .multilineTextAlignment(.center)
                         Text("Your score for passed workout is...\n\(finalScore)")
                             .font(.title3)
                             .fontWeight(.ultraLight)

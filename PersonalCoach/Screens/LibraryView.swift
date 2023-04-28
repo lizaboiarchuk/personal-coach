@@ -54,8 +54,15 @@ struct LibraryView: View {
                 LazyVStack(spacing: 10) {
                     let workoutModels = tab == 1 ? viewModel.workoutModels : viewModel.downloadedWorkoutModels
                     
-                    ForEach(workoutModels.indices, id: \.self) { index in
-                        let workoutModel = workoutModels[index]
+                    
+                    let filteredWorkoutModels = tab == 1 ? workoutModels.filter { workoutModel in
+                        searchText.isEmpty
+                        || workoutModel.workout.name.localizedCaseInsensitiveContains(searchText)
+                        || workoutModel.workout.tags.joined().localizedCaseInsensitiveContains(searchText)
+                    } : workoutModels
+                    
+                    ForEach(filteredWorkoutModels.indices, id: \.self) { index in
+                        let workoutModel = filteredWorkoutModels[index]
                         
                         NavigationLink(destination: WorkoutDetailsView(model: workoutModel)) {
                             LibraryCellView(model: workoutModel)
@@ -70,6 +77,7 @@ struct LibraryView: View {
         } //: VSTACK
         .navigationBarHidden(true)
     }
+
     
     var body: some View {
         

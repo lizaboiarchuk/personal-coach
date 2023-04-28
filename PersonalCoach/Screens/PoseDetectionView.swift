@@ -111,7 +111,7 @@ struct PoseDetectionView: View {
                             .fill(Color.gray.opacity(0.7))
                             .frame(width: 70, height: 70)
                             .overlay(
-                                Text("Score: \n \(detectionViewModel.resultLabel)")
+                                Text("Score\n \(detectionViewModel.resultLabel)")
                                     .font(.title3)
                                     .foregroundColor(.white)
                                     .fontWeight(.heavy)
