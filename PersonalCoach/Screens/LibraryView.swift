@@ -56,7 +56,6 @@ struct LibraryView: View {
             Spacer()
             
         } //: VSTACK
-        .navigationTitle("")
         .navigationBarHidden(true)
     }
     
@@ -123,4 +122,3 @@ struct LibraryView_Previews: PreviewProvider {
         LibraryView()
     }
 }
-

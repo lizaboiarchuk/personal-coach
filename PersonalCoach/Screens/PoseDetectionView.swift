@@ -27,7 +27,7 @@ struct OverlayViewWrapper: UIViewRepresentable {
 
 
 struct PoseDetectionView: View {
-    
+        
     @ObservedObject var detectionViewModel: PoseDetectionViewModel
     @ObservedObject var streamerViewModel: VideoStreamerViewModel
     
@@ -37,21 +37,21 @@ struct PoseDetectionView: View {
     @State private var shouldDismiss = false
     @State private var currentLabel = ""
     @State private var isLabelVisible = false
-
+    @State private var showTabBar = false
+    
     private var onDismiss: (() -> Void)?
     private var workout: WorkoutPreview
-    
     
     func randomizeLabelVisibility() {
         let randomShowInterval = Double.random(in: 0.3...3.0) // Adjust the range as needed
         let randomHideInterval = Double.random(in: 0.5...2.5) // Adjust the range as needed
-
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + randomShowInterval) {
             withAnimation {
                 currentLabel = MotivationalPhrases.phrases.randomElement() ?? "Keep going!"
                 isLabelVisible = true
             }
-
+            
             DispatchQueue.main.asyncAfter(deadline: .now() + randomHideInterval) {
                 withAnimation {
                     isLabelVisible = false
@@ -60,7 +60,7 @@ struct PoseDetectionView: View {
             }
         }
     }
-
+    
     
     init(workout: WorkoutPreview, onDismiss: (() -> Void)?) {
         print("init pose detection")
@@ -145,9 +145,9 @@ struct PoseDetectionView: View {
                     } //: PAUSE CANCEL BUTTONS
                 }//:ZSTACK
             } //:NAVIGATIONVIEW
+            .toolbar(showTabBar ? .visible : .hidden, for: .tabBar)
             .navigationBarBackButtonHidden(true)
-            .toolbar(.hidden, for: .tabBar)
-            
+
             if detectionViewModel.showOverlay {
                 Color.gray.opacity(0.8)
                     .edgesIgnoringSafeArea(.all)
@@ -169,6 +169,7 @@ struct PoseDetectionView: View {
                 detectionViewModel.quit()
                 streamerViewModel.quit()
                 shouldDismiss = true
+                showTabBar = true
                 onDismiss?()
                 
             })
@@ -176,12 +177,8 @@ struct PoseDetectionView: View {
         .onAppear {
             detectionViewModel.startCountdown()
         }
-//        .onDisappear {
-//            print("disapperingggg")
-//            detectionViewModel.quit()
-//            streamerViewModel.quit()
-//
-//        }
-        
+        .onDisappear {
+            print("dissaoering")
+        }
     }
 }

@@ -25,8 +25,7 @@ struct WorkoutDetailsView: View {
     @ObservedObject var viewModel: LibraryCellViewModel
     
     init(model: LibraryCellViewModel) {
-        viewModel = model
-    }
+        viewModel = model    }
     
     var body: some View {
         
@@ -94,14 +93,17 @@ struct WorkoutDetailsView: View {
                                         }
                                         .buttonStyle(ColoredButtonStyle(color: Color("ColorDarkGreen")))
                                         .background(
-                                            NavigationLink(destination: LazyView(PoseDetectionView(workout: viewModel.workout, onDismiss: {
+                                            NavigationLink(destination: LazyView(PoseDetectionView(workout: viewModel.workout,
+                                                                                                    
+                                                                                                    onDismiss: {
                                                 viewModel.navigateToPoseDetection = false
+                                                self.toolbar(.visible, for: .tabBar)
                                             })), isActive: $viewModel.navigateToPoseDetection) {
                                                 EmptyView()
                                             }
                                         )
                                     } //: HSTACK
-
+                                    
                                     .padding()
                                 } //: HSTACK
                             } //: VSTACK
@@ -147,6 +149,5 @@ struct WorkoutDetailsView: View {
             .edgesIgnoringSafeArea(.top)
             
         } //: ZTACK
-        .tint(Color("ColorDarkGreen"))
-    }
+        .tint(Color("ColorDarkGreen"))    }
 }

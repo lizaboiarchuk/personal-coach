@@ -10,6 +10,7 @@ import SwiftUI
 struct LibraryCellView: View {
     @ObservedObject var viewModel: LibraryCellViewModel
     
+    
     init(model: LibraryCellViewModel) {
         viewModel = model
     }
@@ -71,7 +72,8 @@ struct LibraryCellView: View {
                         .tint(Color("ColorDarkGreen"))
                 }
                 .background(
-                    NavigationLink(destination: LazyView(PoseDetectionView(workout: viewModel.workout, onDismiss: {
+                    NavigationLink(destination: LazyView(PoseDetectionView(workout: viewModel.workout,
+                                                                           onDismiss: {
                         viewModel.navigateToPoseDetection = false
                     })), isActive: $viewModel.navigateToPoseDetection) {
                         EmptyView()
