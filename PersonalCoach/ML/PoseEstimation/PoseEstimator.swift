@@ -13,32 +13,37 @@ import TensorFlowLite
 final class PoseEstimator {
     
     // MARK: - Private Properties
+    
     private enum Configuration {
-        static let modelFileName = "movenet_thunder"
-        static let defaultThreadCount = 16
-        static let minimumScore: Float32 = 0.2
-        static let torsoRatio: Float = 1.9
-        static let bodyRatio: Float = 1.2
-        static let minPointScore: Float = 0.4
-        static let meanParam: Float = 0
-        static let stdParam: Float = 1
+        static let modelFileName = "movenet_thunder" // Name of the model file.
+        static let defaultThreadCount = 16 // Default number of threads to use for inference.
+        static let minimumScore: Float32 = 0.2 // Minimum score for a keypoint to be considered valid.
+        static let torsoRatio: Float = 1.9 // Ratio of the torso region to the maximum range of the torso keypoints.
+        static let bodyRatio: Float = 1.2 // Ratio of the body region to the maximum range of the confident keypoints.
+        static let minPointScore: Float = 0.4 // Minimum score for a keypoint to be used in the smart crop calculation.
+        static let meanParam: Float = 0 // Mean value used for normalization of the input image.
+        static let stdParam: Float = 1 // Standard deviation used for normalization of the input image.
     }
     
-    private var interpreter: Interpreter
-    private var inputTensor: Tensor
-    private var outputTensor: Tensor
-    private var cropRegion: DetectionArea?
-    private var isProcessing = false
+    private var interpreter: Interpreter // Interpreter object for running the TensorFlow Lite model.
+    private var inputTensor: Tensor // Input tensor for the model.
+    private var outputTensor: Tensor // Output tensor of the model.
+    private var cropRegion: DetectionArea? // The region of the image that was cropped and resized for the current inference.
+    private var isProcessing = false // Flag to check if a model is busy processing an image.
     
     // MARK: - Init
+    
     init() throws {
+        // Load the TensorFlow Lite model from the app's bundle.
         guard let modelPath = Bundle.main.path(forResource: Configuration.modelFileName, ofType: "tflite") else {
             fatalError("Can not load model.")
         }
+        // Set up the interpreter with the specified options and delegates.
         var options = Interpreter.Options()
         options.threadCount = Configuration.defaultThreadCount
         var delegates = [MetalDelegate()]
         interpreter = try Interpreter(modelPath: modelPath, options: options, delegates: delegates)
+        // Allocate the tensors for the model.
         try interpreter.allocateTensors()
         inputTensor = try interpreter.input(at: 0)
         outputTensor = try interpreter.output(at: 0)
@@ -46,23 +51,39 @@ final class PoseEstimator {
     
     
     // MARK: - Public methods
+    
+    /**
+     Performs pose detection on a given pixel buffer image.
+     
+     - Parameter pixelBuffer: The pixel buffer image to perform pose detection on.
+     
+     - Throws: An `EstimatorError` if an error occurs during the preprocessing, inference, or postprocessing stages.
+     
+     - Returns: A tuple containing the detected keypoints, the total score, a list of confidence scores for each keypoint, and a list of x-y coordinates for each keypoint.
+     */
     func detectPose(on pixelBuffer: CVPixelBuffer) throws -> ([KeyPoint], Float32, [Float32], [[Float]]) {
         guard !isProcessing else { throw EstimatorError.modelBusyError }
         isProcessing = true
         defer { isProcessing = false }
+        // Preprocess the input image and convert it to a tensor.
         guard let data = preprocess(pixelBuffer) else {
             throw  EstimatorError.preprocessError
         }
         do {
+            // Copy the input tensor data to the interpreter.
             try interpreter.copy(data, toInputAt: 0)
+            // Run the interpreter.
             try interpreter.invoke()
+            // Get the output tensor.
             outputTensor = try interpreter.output(at: 0)
         } catch _ { throw  EstimatorError.inferenceError }
+        // Postprocess the output tensor to get the detected keypoints, the total score, and the confidence scores for each keypoint.
         let (result, score, pointsList, positionArray) = postprocess(imageSize: pixelBuffer.size, modelOutput: outputTensor)
         
         guard let points = result else {
             throw  EstimatorError.postprocessError
         }
+        // Return the detected keypoints, the total score, and the confidence scores and coordinates for each keypoint.
         return (points, score, pointsList, positionArray)
     }
     
@@ -94,7 +115,7 @@ final class PoseEstimator {
         return inputData
     }
     
-
+    
     private func postprocess(imageSize: CGSize, modelOutput: Tensor) -> ([KeyPoint]?, Float32, [Float32], [[Float]]) {
         let imgWidth = imageSize.width
         let imgHeight = imageSize.height
@@ -129,57 +150,57 @@ final class PoseEstimator {
         
         return (kpts, totalScore, output, posArr)
     }
-
+    
     
     private func nextFrameCropArea(keyPoints: [KeyPoint], imageWidth: CGFloat, imageHeight: CGFloat) -> DetectionArea {
-         let targetKeyPoints = keyPoints.map { keyPoint in
-             KeyPoint.init(bodyPart: keyPoint.bodyPart,
-                           coordinate: CGPoint(x: keyPoint.coordinate.x, y: keyPoint.coordinate.y),
-                           score: keyPoint.score)
-         }
-         if torsoVisible(keyPoints) {
-             let centerX =
-             (targetKeyPoints[Joint.leftHip.position].coordinate.x
-              + targetKeyPoints[Joint.rightHip.position].coordinate.x) / 2.0
-             let centerY =
-             (targetKeyPoints[Joint.leftHip.position].coordinate.y
-              + targetKeyPoints[Joint.rightHip.position].coordinate.y) / 2.0
-             
-             let torsoAndBodyDistances =
-             calculateTorsoBodyDist(
-                 keyPoints: keyPoints, targetKeyPoints: targetKeyPoints, centerX: centerX, centerY: centerY
-             )
-             
-             let list = [
-                 torsoAndBodyDistances.maxTorsoXDistance * CGFloat(Configuration.torsoRatio),
-                 torsoAndBodyDistances.maxTorsoYDistance * CGFloat(Configuration.torsoRatio),
-                 torsoAndBodyDistances.maxBodyXDistance * CGFloat(Configuration.bodyRatio),
-                 torsoAndBodyDistances.maxBodyYDistance * CGFloat(Configuration.bodyRatio),
-             ]
-             
-             var cropLengthHalf = list.max() ?? 0.0
-             let tmp: [CGFloat] = [
-                 centerX, CGFloat(imageWidth) - centerX, centerY, CGFloat(imageHeight) - centerY,
-             ]
-             cropLengthHalf = min(cropLengthHalf, tmp.max() ?? 0.0)
-             let cropCornerY = centerY - cropLengthHalf
-             let cropCornerX = centerX - cropLengthHalf
-             if cropLengthHalf > (CGFloat(max(imageWidth, imageHeight)) / 2.0) {
-                 return initialCropRegion(imageWidth: imageWidth, imageHeight: imageHeight)
-             } else {
-                 let cropLength = cropLengthHalf * 2
-                 return DetectionArea(
-                     left: max(cropCornerX, 0) / imageWidth,
-                     top: max(cropCornerY, 0) / imageHeight,
-                     right: min((cropCornerX + cropLength) / imageWidth, 1),
-                     bottom: min((cropCornerY + cropLength) / imageHeight, 1))
-             }
-         } else {
-             return initialCropRegion(imageWidth: imageWidth, imageHeight: imageHeight)
-         }
-     }
+        let targetKeyPoints = keyPoints.map { keyPoint in
+            KeyPoint.init(bodyPart: keyPoint.bodyPart,
+                          coordinate: CGPoint(x: keyPoint.coordinate.x, y: keyPoint.coordinate.y),
+                          score: keyPoint.score)
+        }
+        if torsoVisible(keyPoints) {
+            let centerX =
+            (targetKeyPoints[Joint.leftHip.position].coordinate.x
+             + targetKeyPoints[Joint.rightHip.position].coordinate.x) / 2.0
+            let centerY =
+            (targetKeyPoints[Joint.leftHip.position].coordinate.y
+             + targetKeyPoints[Joint.rightHip.position].coordinate.y) / 2.0
+            
+            let torsoAndBodyDistances =
+            calculateTorsoBodyDist(
+                keyPoints: keyPoints, targetKeyPoints: targetKeyPoints, centerX: centerX, centerY: centerY
+            )
+            
+            let list = [
+                torsoAndBodyDistances.maxTorsoXDistance * CGFloat(Configuration.torsoRatio),
+                torsoAndBodyDistances.maxTorsoYDistance * CGFloat(Configuration.torsoRatio),
+                torsoAndBodyDistances.maxBodyXDistance * CGFloat(Configuration.bodyRatio),
+                torsoAndBodyDistances.maxBodyYDistance * CGFloat(Configuration.bodyRatio),
+            ]
+            
+            var cropLengthHalf = list.max() ?? 0.0
+            let tmp: [CGFloat] = [
+                centerX, CGFloat(imageWidth) - centerX, centerY, CGFloat(imageHeight) - centerY,
+            ]
+            cropLengthHalf = min(cropLengthHalf, tmp.max() ?? 0.0)
+            let cropCornerY = centerY - cropLengthHalf
+            let cropCornerX = centerX - cropLengthHalf
+            if cropLengthHalf > (CGFloat(max(imageWidth, imageHeight)) / 2.0) {
+                return initialCropRegion(imageWidth: imageWidth, imageHeight: imageHeight)
+            } else {
+                let cropLength = cropLengthHalf * 2
+                return DetectionArea(
+                    left: max(cropCornerX, 0) / imageWidth,
+                    top: max(cropCornerY, 0) / imageHeight,
+                    right: min((cropCornerX + cropLength) / imageWidth, 1),
+                    bottom: min((cropCornerY + cropLength) / imageHeight, 1))
+            }
+        } else {
+            return initialCropRegion(imageWidth: imageWidth, imageHeight: imageHeight)
+        }
+    }
     
-
+    
     private func initialCropRegion(imageWidth: CGFloat, imageHeight: CGFloat) -> DetectionArea {
         var xMin: CGFloat
         var yMin: CGFloat
@@ -199,7 +220,7 @@ final class PoseEstimator {
         return DetectionArea(left: xMin, top: yMin, right: xMin + width, bottom: yMin + height)
     }
     
-
+    
     private func torsoVisible(_ keyPoints: [KeyPoint]) -> Bool {
         return
         ((keyPoints[Joint.leftHip.position].score > Configuration.minPointScore
