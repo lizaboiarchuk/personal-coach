@@ -30,7 +30,7 @@ class LibraryViewModel: ObservableObject {
             guard let workouts = workouts else { return }
             let totalWorkouts = workouts.count
             for workout in workouts {
-                let workoutPreview = WorkoutPreview(workout: workout)
+                let workoutPreview = WorkoutModel(workout: workout)
                 self.firestoreManager.loadImage(from: workoutPreview.coverURL) { image in
                     DispatchQueue.main.async {
                         guard let image = image else { return }
@@ -59,7 +59,7 @@ extension LibraryViewModel: DownloaderDelegate {
         DispatchQueue.global(qos: .background).async {
             let group = DispatchGroup()
             group.enter()
-            self.firestoreManager.downloadAndSaveFile(from: videoStoragePath, fileName: videoFileName) { path in
+            self.firestoreManager.loadFile(from: videoStoragePath, fileName: videoFileName) { path in
                 if let path = path {
                     savedVideoPath = path
                 }
@@ -70,7 +70,7 @@ extension LibraryViewModel: DownloaderDelegate {
                 group.leave()
             }
             group.enter()
-            self.firestoreManager.downloadAndSaveFile(from: positionsStoragePath, fileName: positionsFileName) { path in
+            self.firestoreManager.loadFile(from: positionsStoragePath, fileName: positionsFileName) { path in
                 if let path = path {
                     savedPositionsPath = path
                 }

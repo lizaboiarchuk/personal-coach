@@ -35,7 +35,7 @@ class PoseDetectionViewModel: ObservableObject {
 
     private var countdownTimer: Timer?
     
-    init(workout: WorkoutPreview) {
+    init(workout: WorkoutModel) {
         self.positionsPath = workout.localPositionsPath
         setupPoseComparer()
         setupOverlayView()

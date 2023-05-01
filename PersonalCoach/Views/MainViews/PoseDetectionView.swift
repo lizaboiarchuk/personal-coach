@@ -44,7 +44,7 @@ struct PoseDetectionView: View {
     @State private var overlayAnimating = false
     
     private var onDismiss: (() -> Void)?
-    private var workout: WorkoutPreview
+    private var workout: WorkoutModel
     
     func randomizeLabelVisibility() {
         let randomShowInterval = Double.random(in: 0.3...3.0) // Adjust the range as needed
@@ -66,7 +66,7 @@ struct PoseDetectionView: View {
     }
     
     
-    init(workout: WorkoutPreview, onDismiss: (() -> Void)?) {
+    init(workout: WorkoutModel, onDismiss: (() -> Void)?) {
         print("init pose detection")
         self.detectionViewModel = PoseDetectionViewModel(workout: workout)
         self.streamerViewModel = VideoStreamerViewModel(videoPath: workout.localVideoPath)

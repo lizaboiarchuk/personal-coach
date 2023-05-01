@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class WorkoutPreview: ObservableObject {
+class WorkoutModel: ObservableObject {
     var description: String
     var tags: [String]
     var coverURL: String
@@ -23,7 +23,6 @@ class WorkoutPreview: ObservableObject {
     @Published var localVideoPath: String?
     @Published var localPositionsPath: String?
     
-    
     init(workout: Workout) {
         self.description = workout.description
         self.tags = workout.tags
@@ -34,4 +33,18 @@ class WorkoutPreview: ObservableObject {
         self.coverURL = workout.cover
         self.uid = workout.uid
     }
+}
+
+
+import Foundation
+
+struct Workout: Codable {
+    var description: String
+    var tags: [String]
+    var cover: String
+    var positions: String
+    var author: String
+    var video: String
+    var name: String
+    var uid: String
 }

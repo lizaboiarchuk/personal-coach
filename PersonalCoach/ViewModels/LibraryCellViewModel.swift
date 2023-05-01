@@ -11,10 +11,10 @@ import SwiftUI
 class LibraryCellViewModel: ObservableObject {
     @Published var currentState: WorkoutDownloadState = .notDownloaded
     @Published var navigateToPoseDetection = false
-    let workout: WorkoutPreview
+    let workout: WorkoutModel
     let delegate: DownloaderDelegate
 
-    init(workout: WorkoutPreview, delegate: DownloaderDelegate) {
+    init(workout: WorkoutModel, delegate: DownloaderDelegate) {
         self.workout = workout
         self.delegate = delegate
         

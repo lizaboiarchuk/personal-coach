@@ -157,7 +157,7 @@ struct WorkoutDetailsView: View {
 struct WorkoutDetailsView_Previews: PreviewProvider {
     static var previews: some View {
         
-        let wp = WorkoutPreview(workout: Workout(
+        let wp = WorkoutModel(workout: Workout(
             description: "  A light morning workout is the perfect way to kick-start your day and gently awaken your body. This routine focuses on low-impact exercises, incorporating gentle stretches and easy-to-follow movements that target all major muscle groups. Begin with a brief warm-up to increase blood flow and loosen up the muscles. \n\tFollow this with a combination of dynamic stretches, bodyweight exercises, and balance training to improve flexibility and overall body strength. Aim to spend 15-20 minutes on this routine, giving your body the chance to gradually awaken and prepare for the day ahead. Remember to listen to your body, and modify any movements as needed to accommodate your personal fitness level. Finish off your session with a cool-down sequence, including deep breathing exercises and static stretches, to leave you feeling refreshed and energized for the day ahead.",
             tags: ["morming", "thigs", "light"],
             cover: "",
